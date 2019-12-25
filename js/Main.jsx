@@ -12,7 +12,7 @@ import KeepApp from './apps/missKeep/pages/KeepApp.jsx'
 import NavBar from './apps/cmps/NavBar.jsx'
 
 
-class App extends React.Component {
+class Main extends React.Component {
 
     render() {
         return (
@@ -32,6 +32,6 @@ class App extends React.Component {
 
 
 ReactDOM.render(
-    <App />,
+    <Main />,
     document.getElementById('root')
 )

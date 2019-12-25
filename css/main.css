@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+}
+
+a {
+    text-transform: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* view helpers */
+
+.flex {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.grid {
+    display: grid;
+}
+
+/* style helpers */
+
+.clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
