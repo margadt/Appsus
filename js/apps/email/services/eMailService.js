@@ -1,24 +1,36 @@
 import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
-export default { getEmails, getEmailById, getNewId };
+export default { getEmails, getEmailById, getNewId, eMailRead };
 
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
 
-function getEmails(filterBy) {
-    const mails = (!filterBy) ? [...gEmails] :
-        gEmails.filter(mail => { return mail.isRead === filterBy.isRead });
+// function getEmails(filterBy) {
+//     const mails = (!filterBy) ? [...gEmails] :
+//         gEmails.filter(mail => { return mail.isRead === filterBy.isRead });
+//     return Promise.resolve(mails);
+// }
+
+function getEmails() {
+    const mails = gEmails;
     return Promise.resolve(mails);
 }
 
 function getEmailById(id) {
     const eMail = gEmails.find(gEmail => gEmail.id === id);
-    return Promise.resolve(gEmail);
+    return Promise.resolve(eMail);
 }
 
 function findEmailIndex(id) {
     return gEmails.findIndex(gEmail => gEmail.id === id);
+}
+
+function eMailRead(id) {
+    let idx = findEmailIndex(id);
+    gEmails[idx].isRead = true;
+    storageService.store(eMailKey, gEmails);
+    return gEmails;
 }
 
 function getNewId(id, diff) {

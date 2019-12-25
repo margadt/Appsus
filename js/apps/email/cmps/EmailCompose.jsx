@@ -2,8 +2,8 @@ export default class EmailCompose extends React.Component {
 
     render() {
         return <React.Fragment>
-            <div>
-                EmailCompose
+            <div className="compose-button pointer">
+                Email Compose
             </div>
         </React.Fragment>
     }
