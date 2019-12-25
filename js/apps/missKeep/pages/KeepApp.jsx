@@ -1,4 +1,4 @@
-import Header from '../cmps/Header.jsx'
+import Header from '../../cmps/Header.jsx'
 import AddNoteInput from '../cmps/AddNoteInput.jsx'
 import NoteList from '../cmps/NoteList.jsx'
 import keepService from '../services/keepService.js'
@@ -18,7 +18,7 @@ export default class KeepApp extends React.Component {
 
     render() {
         return <header className='flex column'>
-            <Header imgSrc='../../../../img/temp-logo.png'></Header>
+            <Header placeHolder="Search notes.."></Header>
             <AddNoteInput ></AddNoteInput>
             <NoteList notes={[...this.state.notes]}></NoteList>
         </header>
