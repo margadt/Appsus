@@ -10,6 +10,98 @@ a {
     color: inherit;
 }
 
+/* missMail */
+
+.main-container {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95vw;
+    min-height: 100vh;
+    grid-template-columns: 200px auto;
+    grid-template-areas:
+    "email-nav-bar email-preview-cont"
+}
+
+.header {
+    width: 100%;
+}
+
+.email-nav-bar {
+    height: 50px;
+    width: 100px;
+    grid-area: email-nav-bar;
+    margin-left: 30px;
+}
+
+.email-nav-bar:first-child {
+    margin-top: 10px;
+}
+
+/* email preview */
+
+.email-preview-container {
+    width: 100%;
+    line-height:30px;
+    height: 30px;
+    grid-area: email-preview-cont
+}
+
+.email-preview-container:first-child {
+    margin-top: 10px;
+}
+
+.email-list div:nth-child(even) {
+    background-color: grey;
+}
+
+.subject, received {
+    width: 100px;
+}
+
+.unread {
+    font-weight: 700;
+}
+
+/* email compose */
+
+.compose-button {
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    width: 150px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin-top: 6px;
+}
+
+/* email details */
+
+.nav-buttons-container {
+    grid-area: back-btn;
+    margin: 0px auto 0px;
+    width: 800px;
+    height: 50px;
+}
+
+.nav-button {
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    width: 80px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin-top: 6px;
+}
+
+.nav-button:nth-child(2) {
+    width: 120px;
+}
+
+.nav-button:not(:last-child) {
+    margin-right:20px;
+}
+
 /* missKeep */
 
 .note-header {
@@ -20,7 +112,7 @@ a {
     width: 50px;
 }
 
-.note-list-container{
+.note-list-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

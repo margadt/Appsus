@@ -18,19 +18,21 @@ export default class EmailApp extends React.Component {
     }
 
     loadEmails = () => {
-        eMailService.getEmails(this.state.filterBy).then(eMails => {
+        eMailService.getEmails().then(eMails => {
             this.setState({ eMails });
         })
     }
 
     render() {
         return <React.Fragment>
-            <div>
-                <EmailStatus />
-                <EmailFilter />
-                <EmailCompose />
+            <div className="main-container grid">
+                <div className="email-nav-bar flex column">
+                    <EmailCompose />
+                    <EmailFilter />
+                    <EmailStatus />
+                </div>
+                <EmailList eMails={this.state.eMails}/>
             </div>
-            <EmailList eMails={this.state.eMails}/>
         </React.Fragment>
     }
 }
