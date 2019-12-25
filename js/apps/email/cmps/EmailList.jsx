@@ -1,10 +1,7 @@
-export default class EmailList extends React.Component {
+import EmailPreview from './EmailPreview.jsx'
 
-    render() {
-        return <React.Fragment>
-            <div>
-                EmailList
-            </div>
-        </React.Fragment>
-    }
+export default function eMailList(props) {
+    return <React.Fragment>
+                {props.eMails.map((eMail, i) => <EmailPreview key={i} eMail={eMail}/>)}
+           </React.Fragment>
 }
