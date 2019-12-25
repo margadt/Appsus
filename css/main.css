@@ -27,9 +27,23 @@ a {
 }
 
 .note{
-    width: 100px;
+    width: 200px;
     border: 1px solid black;
 }
+
+.note img{
+    width: 200px;
+}
+
+.pinned{
+    order: -1;
+}
+
+.pinned-img{
+    width: 40px;
+}
+
+
 
 /* view helpers */
 
