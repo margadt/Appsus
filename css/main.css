@@ -1,3 +1,5 @@
+/* base */
+
 body {
     margin: 0;
 }
@@ -6,6 +8,27 @@ a {
     text-transform: none;
     text-decoration: none;
     color: inherit;
+}
+
+/* missKeep */
+
+.note-header {
+    margin-bottom: 5px;
+}
+
+.logo {
+    width: 50px;
+}
+
+.note-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.note{
+    width: 100px;
+    border: 1px solid black;
 }
 
 /* view helpers */
@@ -56,6 +79,10 @@ a {
 
 .grid {
     display: grid;
+}
+
+.border {
+    border: 1px solid black;
 }
 
 /* style helpers */
