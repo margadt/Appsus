@@ -1,4 +1,5 @@
 import storageService from "../../../services/storageService.js"
+import {getRandomId} from "../../../services/utils.js"
 
 export default {getEmails};
 
@@ -13,19 +14,22 @@ function getEmails(filterBy) {
 
 function createEmails() {
     const eMails =[
-        {
+        {   
+            id: getRandomId(),
             subject: 'Hello',
             body: 'Is it me you\'re looking for?',
             isRead: false,
             sentAt: 1577269608218
         },
-        {
+        {   
+            id: getRandomId(),
             subject: 'Cause I wonder',
             body: 'where you are?',
             isRead: false,
             sentAt: 1577183208218
         },
-        {
+        {   
+            id: getRandomId(),
             subject: 'And I wonder',
             body: 'What you do',
             isRead: false,
