@@ -15,18 +15,22 @@ export default class KeepApp extends React.Component {
     loadNotes = () => {
 
         keepService.getNotes().then(notes => this.setState({ notes: notes }));
-
     }
 
     onAddNote = (type, val) => {
         keepService.addNote(type, val).then(() => this.loadNotes());
     }
 
+    onDeleteNote = () => {
+        const { noteId } = this.props.match.params;
+        keepService.deleteNote(noteId).then(this.loadNotes)
+    }
+
     render() {
         return <header className='flex column'>
             <Header placeHolder="Search notes.."></Header>
             <AddNoteInput onAddNote={this.onAddNote}></AddNoteInput>
-            <NoteList notes={[...this.state.notes]}></NoteList>
+            <NoteList onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]}></NoteList>
         </header>
     }
 }

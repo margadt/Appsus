@@ -2,7 +2,7 @@ import { getRandomId } from '../../../services/utils.js'
 import getDefaultNotes from '../data/defaultNotes.js'
 import storageService from '../../../services/storageService.js'
 
-export default { getNotes, addNote }
+export default { getNotes, addNote, deleteNote }
 
 let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
@@ -69,4 +69,12 @@ function addTodos(val) {
             todos: todos.map(todo => ({ txt: todo, doneAt: Date.now() }))
         }
     }
+}
+
+function deleteNote(noteId) {
+    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== noteId));
+    gNotes = newNotes.then(res => [...res]);
+    gNotes.then(notes => storageService.store('notes', notes));
+    return Promise.resolve();
+
 }

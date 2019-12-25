@@ -25,6 +25,7 @@ class Main extends React.Component {
                         <Route component={EmailApp} path='/email' exact></Route>
                         <Route component={EmailDetailsPage} path='/email/:id' exact></Route>
                         <Route component={KeepApp} path='/keep' exact></Route>
+                        <Route component={KeepApp} path='/keep/:noteId' exact></Route>
                     </Switch>
                 </Router>
             </main>

@@ -2,9 +2,7 @@ const { Link } = ReactRouterDOM;
 
 export default function TodosPreview(props) {
     const { note } = props;
-    console.log(note);
-
-    return <Link to={`/note/${note.id}`}>
+    return <Link to={`/keep/${note.id}`}>
         <div className='note'>
             <h1>{note.info.label}</h1>
             <hr />
