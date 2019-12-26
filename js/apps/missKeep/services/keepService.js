@@ -1,3 +1,4 @@
+'use strict'
 import { getRandomId } from '../../../services/utils.js'
 import getDefaultNotes from '../data/defaultNotes.js'
 import storageService from '../../../services/storageService.js'
@@ -110,12 +111,23 @@ function updateNote(updateNote, val) {
             gNotes = gNotes.then(notes => {
                 return notes.map(note => {
                     if (note.id === updateNote.id) {
-                        note.info.title = val
+                        note.info.title = val;
                         return note;
                     }
                     return note;
-                })
-            })
+                });
+            });
+            break;
+        case 'NoteText':
+            gNotes = gNotes.then(notes => {
+                return notes.map(note => {
+                    if (note.id === updateNote.id) {
+                        note.info.txt = val;
+                        return note;
+                    }
+                    return note;
+                });
+            });
             break;
         default:
             return 'Wrong format';

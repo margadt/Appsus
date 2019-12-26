@@ -23,8 +23,6 @@ export default class KeepApp extends React.Component {
     // }
 
     onSelectNote = (note) => {
-        console.log('seletectedddd', note);
-
         this.setState({ selectedNote: note })
     }
     onAddNote = (type, val) => {

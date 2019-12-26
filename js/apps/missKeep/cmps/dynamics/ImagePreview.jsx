@@ -16,10 +16,7 @@ export default class ImagePreview extends React.Component {
 
     emitChange = (ev) => {
         ev.preventDefault();
-        this.setState({ title: ev.target.innerHTML }, console.log);
-
-
-        // debugger
+        this.setState({ title: ev.target.innerHTML });
     }
 
     onEvStopProp = (ev) => {
@@ -36,6 +33,5 @@ export default class ImagePreview extends React.Component {
             <button onClick={this.props.onDeleteNote} >x</button>
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div>
-
     }
 }
