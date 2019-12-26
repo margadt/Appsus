@@ -34,8 +34,15 @@ export default class EmailDetailsPage extends React.Component {
         this.props.history.push(`/email/${newId}`);
     }
 
+    onMarkAsUnread = () => {
+        console.log('working');
+        const { id } = this.props.match.params;
+        eMailService.markAsUnread(id);
+    }
+
     render() {
         if (!this.state.selectedEmail) return <div>Loading...</div>
-        return <EmailDetails eMail={this.state.selectedEmail} goBack={this.goBack} changeEmailShown={this.changeEmailShown} />
+        return <EmailDetails eMail={this.state.selectedEmail} goBack={this.goBack}
+         changeEmailShown={this.changeEmailShown} onMarkAsUnread={this.onMarkAsUnread} />
     }
 }

@@ -1,7 +1,7 @@
 import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
-export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend, getUnreadEmailsCount };
+export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend, getUnreadEmailsCount, markAsUnread };
 
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
@@ -24,6 +24,13 @@ function findEmailIndex(id) {
 function eMailRead(id) {
     let idx = findEmailIndex(id);
     gEmails[idx].isRead = true;
+    storageService.store(eMailKey, gEmails);
+    return gEmails;
+}
+
+function markAsUnread(id) {
+    let idx = findEmailIndex(id);
+    gEmails[idx].isRead = false;
     storageService.store(eMailKey, gEmails);
     return gEmails;
 }

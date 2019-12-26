@@ -58,11 +58,22 @@ a {
     display: none;
 }
 
+.preview-check {
+    border: 0;
+    display: flex;
+    line-height: 30px;
+}
+
+.edit-menu {
+    height: 30px;
+}
+
 .show {
     display: flex;
 }
 
 .subject {
+    padding-left: 10px;
     width: 300px;
 }
 
