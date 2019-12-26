@@ -14,6 +14,7 @@ export default class EmailPreview extends React.Component {
         return <React.Fragment>
             <div className={` email-preview-container flex column ${this.isUnread()}`}>
                 <Link className="flex space-between" to={`/email/${props.eMail.id}`}>
+                    <div><input className="preview-check" type="checkbox"></input></div>
                     <span className="subject">Subject: {props.eMail.subject} </span>
                     <span className="received">{formatDate(props.eMail.sentAt)}</span>
                 </Link>
