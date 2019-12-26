@@ -9,12 +9,24 @@ export default class EmailPreview extends React.Component {
         return (!unread) ? 'unread' : '';
     }
 
+    // isChecked = (event) => {
+    //     event.stopPropagation();
+    //     let id = event.currentTarget.id;
+    //     let value = event.target.checked;
+    //     this.props.showButtons(value, id);
+    //     this.onMarkRead(id);
+    // }
+
+    // onMarkRead(id) {
+    //     this.props.onMarkRead(id);
+    // }
+
     render() {
         const { props } = this;
         return <React.Fragment>
             <div className={` email-preview-container flex column ${this.isUnread()}`}>
                 <Link className="flex space-between" to={`/email/${props.eMail.id}`}>
-                    <div><input className="preview-check" type="checkbox"></input></div>
+                    {/* <input className="preview-check" id={props.eMail.id} type="checkbox" onClick={this.isChecked}></input> */}
                     <span className="subject">Subject: {props.eMail.subject} </span>
                     <span className="received">{formatDate(props.eMail.sentAt)}</span>
                 </Link>

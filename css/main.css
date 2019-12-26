@@ -64,6 +64,10 @@ a {
     line-height: 30px;
 }
 
+.edit-menu {
+    height: 30px;
+}
+
 .show {
     display: flex;
 }

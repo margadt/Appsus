@@ -40,6 +40,10 @@ export default class EmailApp extends React.Component {
         eventBusService.emit('toggle', true);
     }
 
+    // onMarkRead = (id) => {
+    //     console.log(id);
+    // }
+
     render() {
         return <React.Fragment>
             <div className="main-container grid">
