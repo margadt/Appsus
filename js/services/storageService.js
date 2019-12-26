@@ -1,10 +1,21 @@
-export default {store, load}
+export default { store, load, loadPromise }
 
 function store(key, any) {
     localStorage[key] = JSON.stringify(any);
 }
 
 function load(key) {
-    var str = localStorage[key] || 'null';
+    let str = localStorage[key] || 'null';
     return JSON.parse(str);
 }
+
+function loadPromise(key) {
+    let str = localStorage[key];
+    if (str) {
+        return Promise.resolve(JSON.parse(str));
+    } else {
+        return Promise.resolve(null);
+    }
+}
+
+

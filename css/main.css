@@ -139,12 +139,27 @@ a {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 10px;
 }
 
-.note {
-    width: 100px;
+.note{
+    width: 200px;
     border: 1px solid black;
 }
+
+.note img{
+    width: 200px;
+}
+
+.pinned{
+    order: -1;
+}
+
+.pinned-img{
+    width: 40px;
+}
+
+
 
 /* view helpers */
 
