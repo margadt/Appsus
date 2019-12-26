@@ -2,14 +2,14 @@ import { getRandomId } from '../../../services/utils.js'
 import getDefaultNotes from '../data/defaultNotes.js'
 import storageService from '../../../services/storageService.js'
 
-export default { getNotes, addNote, deleteNote }
+export default { getNotes, addNote, deleteNote, updateNote }
 
 let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
 
 function getNotes(filterBy) {
-    console.log(filterBy);
-    
+    // console.log(filterBy);
+
     if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
     return gNotes.then(notes => {
         return [...notes.filter(note => {
@@ -102,5 +102,25 @@ function deleteNote(delNote) {
     gNotes = newNotes.then(res => [...res]);
     gNotes.then(notes => storageService.store('notes', notes));
     return Promise.resolve();
-
 }
+
+function updateNote(updateNote, val) {
+    switch (updateNote.type) {
+        case 'NoteImg':
+            gNotes = gNotes.then(notes => {
+                return notes.map(note => {
+                    if (note.id === updateNote.id) {
+                        note.info.title = val
+                        return note;
+                    }
+                    return note;
+                })
+            })
+            break;
+        default:
+            return 'Wrong format';
+    }
+    gNotes.then(notes => storageService.store('notes', notes));
+    return Promise.resolve();
+}
+

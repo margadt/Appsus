@@ -4,9 +4,8 @@ export default class ImagePreview extends React.Component {
         title: this.props.note.info.title
     }
 
-    componentWillUnmount(){
-        console.log('out', this.state.title);
-        
+    onSaveBtn = () => {
+        this.props.updateNote(this.props.note, this.state.title);
     }
 
     onSelectNote = () => {
@@ -17,7 +16,9 @@ export default class ImagePreview extends React.Component {
 
     emitChange = (ev) => {
         ev.preventDefault();
-        console.log(ev);
+        this.setState({ title: ev.target.innerHTML }, console.log);
+
+
         // debugger
     }
 
@@ -33,7 +34,7 @@ export default class ImagePreview extends React.Component {
             <h2 contentEditable='true' onInput={this.emitChange} onClick={this.onEvStopProp} suppressContentEditableWarning={true}>{note.info.title}</h2>
             <img src={note.info.url} alt='note-img' />
             <button onClick={this.props.onDeleteNote} >x</button>
-            {!this.state.saveHidden && <button>Save</button>}
+            {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div>
 
     }
