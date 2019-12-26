@@ -19,9 +19,8 @@ export default class EmailCompose extends React.Component {
         this.eventKiller && this.eventKiller();
     }
 
-
     render() {
         if (!this.state.display) return null;
-        return <EmailComposeForm />
+        return <EmailComposeForm onEmailSend={this.props.onEmailSend} />
     }
 }

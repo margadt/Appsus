@@ -1,19 +1,14 @@
 import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
-export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend };
+export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend, getUnreadEmailsCount };
 
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
 
-// function getEmails(filterBy) {
-//     const mails = (!filterBy) ? [...gEmails] :
-//         gEmails.filter(mail => { return mail.isRead === filterBy.isRead });
-//     return Promise.resolve(mails);
-// }
-
-function getEmails() {
-    const mails = gEmails;
+function getEmails(filterBy) {
+    const mails = (filterBy.isRead === '') ? [...gEmails] :
+        gEmails.filter(mail => { return mail.isRead === JSON.parse(filterBy.isRead)} );
     return Promise.resolve(mails);
 }
 
@@ -45,6 +40,15 @@ function eMailSend(eMail) {
     gEmails = [eMail, ...gEmails];
     storageService.store(eMailKey, gEmails);
     return Promise.resolve();
+}
+
+function getUnreadEmailsCount() {
+    let counter = 0;
+    gEmails.forEach(gEmail => {
+        if (gEmail.isRead === false) counter++
+    });
+    if (counter === 0) return '';
+    return counter;
 }
 
 function createEmails() {

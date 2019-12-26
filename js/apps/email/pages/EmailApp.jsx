@@ -6,29 +6,35 @@ import eventBusService from '../../../services/eventBusService.js'
 
 export default class EmailApp extends React.Component {
 
+    eventKiller = null;
+
     state = {
         eMails: [],
         filterBy: {
-            isRead: false
+            isRead: ''
         }
     }
 
     componentDidMount() {
         this.loadEmails();
+        this.eventKiller = eventBusService.on('loadEmails', () => {
+            this.loadEmails();
+        })
     }
 
-    componentDidUpdate(prevState) {
-        if (prevState.eMails !== this.state.eMails) {
-            console.log('working');
-        }
+    componentWillUnmount() {
+        this.eventKiller && this.eventKiller();
     }
 
     loadEmails = () => {
-        eMailService.getEmails().then(eMails => {
+        eMailService.getEmails(this.state.filterBy).then(eMails => {
             this.setState({ eMails });
         })
     }
 
+    onSetFilter = (filterBy) => {
+        this.setState(prevState => ({ filterBy: { ...prevState.filterBy, ...filterBy } }), this.loadEmails);
+    }
 
     onCompose = () => {
         eventBusService.emit('toggle', true);
@@ -39,7 +45,7 @@ export default class EmailApp extends React.Component {
             <div className="main-container grid">
                 <div className="email-nav-bar flex column">
                     <div className="compose-button pointer" onClick={this.onCompose}>Compose +</div>
-                    <EmailFilter />
+                    <EmailFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
                     <EmailStatus />
                 </div>
                 <EmailList eMails={this.state.eMails} />
