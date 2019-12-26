@@ -5,7 +5,8 @@ import keepService from '../services/keepService.js'
 
 export default class KeepApp extends React.Component {
     state = {
-        notes: []
+        notes: [],
+        
     }
 
     componentDidMount() {

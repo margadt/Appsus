@@ -7,6 +7,7 @@ export default function TodosPreview(props) {
             <h1>{note.info.label}</h1>
             <hr />
             {note.info.todos.map((todo, i) => <p key={Date.now() + i}>{todo.txt}  at  {todo.doneAt ? new Date(todo.doneAt).toLocaleString() : ''}</p>)}
+            <button onClick={props.onDeleteNote} >x</button>
         </div>
     </Link>
 }
