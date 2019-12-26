@@ -24,6 +24,9 @@ function addNote(type, val) {
         case 'NoteTodos':
             newNote = addTodos(val);
             break;
+        case 'NoteVideo':
+            newNote = addVideo(val);
+            break;
         default:
             return 'Wrong format';
     }
@@ -48,6 +51,7 @@ function addImg(val) {
     return {
         id: getRandomId(),
         type: "NoteImg",
+        isPinned: false,
         info: {
             url: val,
             title: "Me playing Mi"
@@ -64,6 +68,7 @@ function addTodos(val) {
     return {
         id: getRandomId(),
         type: "NoteTodos",
+        isPinned: false,
         info: {
             label: "Todo:",
             todos: todos.map(todo => ({ txt: todo, doneAt: Date.now() }))
@@ -71,8 +76,21 @@ function addTodos(val) {
     }
 }
 
-function deleteNote(noteId) {
-    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== noteId));
+function addVideo(val) {
+    let url = val.replace('watch?v=', 'embed/')
+    return {
+        id: getRandomId(),
+        type: "NoteVideo",
+        isPinned: false,
+        info: {
+            url: url
+        }
+    }
+}
+function deleteNote(delNote) {
+    console.log('delnote', delNote.id);
+    
+    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== delNote.id));
     gNotes = newNotes.then(res => [...res]);
     gNotes.then(notes => storageService.store('notes', notes));
     return Promise.resolve();

@@ -5,7 +5,8 @@ import keepService from '../services/keepService.js'
 
 export default class KeepApp extends React.Component {
     state = {
-        notes: []
+        notes: [],
+        selectedNote: null
     }
 
     componentDidMount() {
@@ -13,24 +14,39 @@ export default class KeepApp extends React.Component {
     }
 
     loadNotes = () => {
-
         keepService.getNotes().then(notes => this.setState({ notes: notes }));
     }
 
+    removeSelected = () => {
+        this.setState({ selectedNote: null })
+    }
+
+    onSelectNote = (note) => {
+        this.setState({ selectedNote: note })
+        console.log('selected', note);
+        
+    }
+
     onAddNote = (type, val) => {
-        keepService.addNote(type, val).then(() => this.loadNotes());
+        keepService.addNote(type, val)
+            .then(() => {
+                this.loadNotes();
+            });
     }
 
     onDeleteNote = () => {
-        const { noteId } = this.props.match.params;
-        keepService.deleteNote(noteId).then(this.loadNotes)
+        keepService.deleteNote(this.state.selectedNote)
+            .then(() => {
+                this.removeSelected()
+                this.loadNotes();
+            });
     }
 
     render() {
         return <header className='flex column'>
             <Header placeHolder="Search notes.."></Header>
             <AddNoteInput onAddNote={this.onAddNote}></AddNoteInput>
-            <NoteList onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]}></NoteList>
+            <NoteList onSelectNote={this.onSelectNote} onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]}></NoteList>
         </header>
     }
 }

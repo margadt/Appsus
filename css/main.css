@@ -150,7 +150,7 @@ a {
 }
 
 .note{
-    width: 200px;
+    width: fit-content;
     border: 1px solid black;
 }
 
