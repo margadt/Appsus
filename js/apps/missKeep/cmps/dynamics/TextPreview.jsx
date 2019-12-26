@@ -1,14 +1,18 @@
-const { Link } = ReactRouterDOM;
+export default class TextPreview extends React.Component {
 
-export default function TextPreview(props) {
-    const { note } = props;
 
-    return <Link className={note.isPinned ? 'pinned' : ''} to={`/keep/${note.id}`}>
-        <div className='note'>
+    onSelectNote = () => {
+        if (this.props.onSelectNote) {
+            this.props.onSelectNote(this.props.note);
+        }
+    }
+
+    render() {
+        const { note } = this.props;
+        return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
             {note.isPinned ? <h1>📌</h1> : ''}
-            <p>{note.info.txt}</p>
-            <button onClick={props.onDeleteNote} >x</button>
-        </div>
-    </Link>
+            <p> {note.info.txt}</p>
+            <button onClick={this.props.onDeleteNote} >x</button>
+        </div >
+    }
 }
-

@@ -1,26 +1,33 @@
-const { Link } = ReactRouterDOM;
-
 export default class ImagePreview extends React.Component {
-
     state = {
-        hidden: false
+        hidden: false,
+        title: this.props.note.info.title
+    }
+
+    onSelectNote = () => {
+        if (this.props.onSelectNote) {
+            this.props.onSelectNote(this.props.note);
+        }
     }
 
     onDelBtnToggler = () => {
-        console.log('ondel', this.state.hidden);
-        this.setState({hidden: false});
+        this.setState({ hidden: false });
+    }
 
+    emitChange = (ev) => {
+        console.log('ev.pre');
+
+        this.setState({ title: ev.currentTarget.textContent })
     }
 
 
     render() {
         const { note } = this.props;
-        return <Link to={`/keep/${note.id}`}>
-            <div className='note' onClick={this.onDelBtnToggler}>
-                <h2>{note.info.title}</h2>
-                <img src={note.info.url} alt='note-img' />
-                {!this.state.hidden && <button onClick={this.props.onDeleteNote} >x</button>}
-            </div>
-        </Link>
+        return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
+            <h2 contentEditable='true' onInput={this.emitChange} onClick={(ev)=>{ev.stopPropagation()}} suppressContentEditableWarning={true}>{note.info.title}</h2>
+            <img src={note.info.url} alt='note-img' />
+            {!this.state.hidden && <button onClick={this.props.onDeleteNote} >x</button>}
+        </div>
+
     }
 }

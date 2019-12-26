@@ -87,8 +87,10 @@ function addVideo(val) {
         }
     }
 }
-function deleteNote(noteId) {
-    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== noteId));
+function deleteNote(delNote) {
+    console.log('delnote', delNote.id);
+    
+    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== delNote.id));
     gNotes = newNotes.then(res => [...res]);
     gNotes.then(notes => storageService.store('notes', notes));
     return Promise.resolve();
