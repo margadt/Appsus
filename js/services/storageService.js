@@ -1,6 +1,8 @@
 export default { store, load, loadPromise }
 
 function store(key, any) {
+    console.log('stored');
+
     localStorage[key] = JSON.stringify(any);
 }
 
@@ -10,7 +12,8 @@ function load(key) {
 }
 
 function loadPromise(key) {
-    let str = localStorage[key];
+    let str = localStorage[key] || 'null';
+
     if (str) {
         return Promise.resolve(JSON.parse(str));
     } else {

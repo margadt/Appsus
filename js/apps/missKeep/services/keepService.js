@@ -7,8 +7,18 @@ export default { getNotes, addNote, deleteNote }
 let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
 
-function getNotes() {
-    return gNotes.then(notes => [...notes]);
+function getNotes(filterBy) {
+    console.log(filterBy);
+    
+    if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
+    return gNotes.then(notes => {
+        return [...notes.filter(note => {
+            return note.info.title && note.info.title.includes(filterBy.title) ||
+                note.info.txt && note.info.txt.includes(filterBy.title) ||
+                note.info.label && note.info.label.includes(filterBy.title) ||
+                note.info.todos && note.info.todos.some(todo => todo.txt.includes(filterBy.title))
+        })];
+    })
 }
 
 function addNote(type, val) {
@@ -88,8 +98,6 @@ function addVideo(val) {
     }
 }
 function deleteNote(delNote) {
-    console.log('delnote', delNote.id);
-    
     let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== delNote.id));
     gNotes = newNotes.then(res => [...res]);
     gNotes.then(notes => storageService.store('notes', notes));
