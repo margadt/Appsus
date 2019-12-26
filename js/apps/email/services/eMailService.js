@@ -1,7 +1,7 @@
 import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
-export default { getEmails, getEmailById, getNewId, eMailRead };
+export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend };
 
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
@@ -39,6 +39,12 @@ function getNewId(id, diff) {
     if(idx < 0) idx = gEmails.length-1;
     if(idx > gEmails.length-1) idx = 0;
     return gEmails[idx].id;
+}
+
+function eMailSend(eMail) {
+    gEmails = [eMail, ...gEmails];
+    storageService.store(eMailKey, gEmails);
+    return Promise.resolve();
 }
 
 function createEmails() {

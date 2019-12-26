@@ -13,7 +13,7 @@ export default class EmailPreview extends React.Component {
         const { props } = this;
         return <React.Fragment>
             <div className={` email-preview-container flex column ${this.isUnread()}`}>
-                <Link to={`/email/${props.eMail.id}`}>
+                <Link className="flex space-between" to={`/email/${props.eMail.id}`}>
                     <span className="subject">Subject: {props.eMail.subject} </span>
                     <span className="received">{formatDate(props.eMail.sentAt)}</span>
                 </Link>

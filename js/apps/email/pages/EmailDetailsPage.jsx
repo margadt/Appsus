@@ -10,7 +10,7 @@ export default class EmailDetailsPage extends React.Component {
         this.loadEmail();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.loadEmail();
         }
