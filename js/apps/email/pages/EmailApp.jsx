@@ -2,6 +2,7 @@ import eMailService from '../services/eMailService.js'
 import EmailStatus from '../cmps/EmailStatus.jsx'
 import EmailFilter from '../cmps/EmailFilter.jsx'
 import EmailList from '../cmps/EmailList.jsx'
+import EmailSearchBar from '../cmps/EmailSearchBar.jsx'
 import eventBusService from '../../../services/eventBusService.js'
 
 export default class EmailApp extends React.Component {
@@ -10,7 +11,8 @@ export default class EmailApp extends React.Component {
 
     state = {
         eMails: [],
-        filterBy: ''
+        filterBy: '',
+        searchText: ''
     }
 
     componentDidMount() {
@@ -25,7 +27,7 @@ export default class EmailApp extends React.Component {
     }
 
     loadEmails = () => {
-        eMailService.getEmails(this.state.filterBy).then(eMails => {
+        eMailService.getEmails(this.state.filterBy, this.state.searchText).then(eMails => {
             return this.setState({ eMails });
         })
     }
@@ -58,6 +60,10 @@ export default class EmailApp extends React.Component {
         this.loadEmails();
     }
 
+    onSearchText = (searchText, filter) => {
+        this.setState(({searchText: searchText, filterBy: filter}), this.loadEmails);
+    }
+
     render() {
         return <React.Fragment>
             <div className="main-container grid">
@@ -66,6 +72,7 @@ export default class EmailApp extends React.Component {
                     <EmailFilter onSetFilter={this.onSetFilter} />
                     <EmailStatus eMails={this.state.eMails}/>
                 </div>
+                <EmailSearchBar eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter}/>
                 <EmailList eMails={this.state.eMails} onMarkAsUnread={this.onMarkAsUnread} onMarkAsRead={this.onMarkAsRead} 
                            onDelete={this.onDelete} onImportant={this.onImportant}/>
             </div>

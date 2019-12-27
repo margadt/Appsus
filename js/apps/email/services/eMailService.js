@@ -10,26 +10,34 @@ export default {
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
 
-function getEmails(filterBy) {
-    let mails = [];
+function getEmails(filterBy, searchText) {
+    let mails = searchEmail(searchText);
     switch (true) {
         case (filterBy === ''): {
-            mails = [...gEmails];
             break;
         }
         case (filterBy === 'isRead'): {
-            mails = gEmails.filter(gEmail => (!gEmail.isRead));
+            mails = mails.filter(mail => (!mail.isRead));
             break;
         }
         case (filterBy === 'isImportant'): {
-            mails = gEmails.filter(gEmail => (gEmail.isImportant));
+            mails = mails.filter(mail => (mail.isImportant));
             break;
         }
         case (filterBy === 'isSent'): {
-            mails = gEmails.filter(gEmail => (gEmail.isSent));
+            mails = mails.filter(mail => (mail.isSent));
         }
     }
     return Promise.resolve(mails);
+}
+
+function searchEmail(searchText) {
+    const mails = [...gEmails];
+    if (searchText === '') {
+        return mails
+    } else {
+        return mails.filter(mail => mail.subject.toLowerCase().includes(searchText.toLowerCase()));
+    }
 }
 
 function getEmailById(id) {
@@ -135,3 +143,34 @@ function createEmails() {
     storageService.store(eMailKey, eMails);
     return eMails;
 }
+
+// function getEmails(filterBy) {
+//     let mails = [];
+//     switch (true) {
+//         case (filterBy === ''): {
+//             mails = [...gEmails];
+//             break;
+//         }
+//         case (filterBy === 'isRead'): {
+//             mails = gEmails.filter(gEmail => (!gEmail.isRead));
+//             break;
+//         }
+//         case (filterBy === 'isImportant'): {
+//             mails = gEmails.filter(gEmail => (gEmail.isImportant));
+//             break;
+//         }
+//         case (filterBy === 'isSent'): {
+//             mails = gEmails.filter(gEmail => (gEmail.isSent));
+//         }
+//     }
+//     return Promise.resolve(mails);
+// }
+
+// function searchEmail(searchText, filter) {
+//     const mails = getEmails(filter).then(mails => {
+//         return mails.filter(mail => 
+//             mail.subject.toLowerCase().includes(searchText.toLowerCase()));
+//     });
+//     console.log(mails);
+//     return Promise.resolve(mails);
+// }
