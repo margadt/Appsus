@@ -11,7 +11,7 @@ export default class EmailFilter extends React.Component {
             <div className="mail-filter-container">
                 <div className="pointer" onClick={() => this.changeInput('')}>Inbox {eMailService.getUnreadEmailsCount()}</div>
                 <div className="pointer" onClick={() => this.changeInput('isRead')}>Unread Messages</div>
-                <div className="pointer" onClick={() => this.changeInput('isImportant')}>important {eMailService.getImportantEmailsCount()}%</div>
+                <div className="pointer" onClick={() => this.changeInput('isImportant')}>important {eMailService.getImportantEmailsCount()}</div>
                 <div className="pointer" onClick={() => this.changeInput('isSent')}>Sent Mail</div>
             </div>
         </React.Fragment >
