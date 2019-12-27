@@ -9,8 +9,6 @@ let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
 
 function getNotes(filterBy) {
-    // console.log(filterBy);
-
     if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
     return gNotes.then(notes => {
         return [...notes.filter(note => {
@@ -19,7 +17,7 @@ function getNotes(filterBy) {
                 note.info.label && note.info.label.includes(filterBy.title) ||
                 note.info.todos && note.info.todos.some(todo => todo.txt.includes(filterBy.title))
         })];
-    })
+    });
 }
 
 function addNote(type, val) {
@@ -94,12 +92,13 @@ function addVideo(val) {
         type: "NoteVideo",
         isPinned: false,
         info: {
+            title: 'New Video',
             url: url
         }
     }
 }
 function deleteNote(delNote) {
-    let newNotes = gNotes.then(notes => [...notes].filter(note => note.id !== delNote.id));
+    let newNotes = gNotes.then(notes => notes.filter(note => note.id !== delNote.id));
     gNotes = newNotes.then(res => [...res]);
     gNotes.then(notes => storageService.store('notes', notes));
     return Promise.resolve();
@@ -129,6 +128,35 @@ function updateNote(updateNote, val) {
                 });
             });
             break;
+        case 'NoteTodos':
+            gNotes = gNotes.then(notes => {
+                return notes.map(note => {
+                    if (note.id === updateNote.id) {
+                        let label = val.label;
+                        note.info.label = label;
+                        for (let todo in val.todos) {
+                            let idx = getTodosIdx(todo);
+                            let txt = val.todos[todo];
+                            note.info.todos[idx].txt = txt;
+                            note.info.todos[idx].doneAt = Date.now();
+                        };
+                        return note;
+                    }
+                    return note;
+                });
+            });
+            break;
+        case 'NoteVideo':
+            gNotes = gNotes.then(notes => {
+                return notes.map(note => {
+                    if (note.id === updateNote.id) {
+                        note.info.title = val;
+                        return note;
+                    }
+                    return note;
+                });
+            });
+            break;
         default:
             return 'Wrong format';
     }
@@ -136,3 +164,7 @@ function updateNote(updateNote, val) {
     return Promise.resolve();
 }
 
+
+function getTodosIdx(todo) {
+    return +todo.substring(4);
+}
