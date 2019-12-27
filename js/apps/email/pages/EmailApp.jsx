@@ -81,8 +81,7 @@ export default class EmailApp extends React.Component {
                         <EmailList eMails={this.state.eMails} onToggleMarkAsRead={this.onToggleMarkAsRead}
                             onDelete={this.onDelete} onImportant={this.onImportant} />
                     </Route>
-                    <Route path={`/email/:id`}>
-                        <EmailDetailsPage />
+                    <Route path={`/email/:id`} render={(props) => <EmailDetailsPage {...props}/>}>
                     </Route>
                 </Switch>
                 </Router>
