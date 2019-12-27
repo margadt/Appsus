@@ -3,6 +3,7 @@ import eMailService from '../services/eMailService.js'
 export default class EmailFilter extends React.Component {
 
     changeInput = (filter) => {
+        this.props.history.push('/email')
         this.props.onSetFilter(filter);
     }
 

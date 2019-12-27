@@ -1,8 +1,6 @@
 export default { store, load, loadPromise }
 
 function store(key, any) {
-    console.log('stored');
-
     localStorage[key] = JSON.stringify(any);
 }
 

@@ -33,7 +33,7 @@ export default class EmailDetailsPage extends React.Component {
         const newId = eMailService.getNewId(id, diff);
         this.props.history.push(`/email/${newId}`);
     }
-
+    
     render() {
         if (!this.state.selectedEmail) return <div>Loading...</div>
         return <EmailDetails eMail={this.state.selectedEmail} goBack={this.goBack} changeEmailShown={this.changeEmailShown}/>

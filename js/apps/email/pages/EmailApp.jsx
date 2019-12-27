@@ -3,7 +3,14 @@ import EmailStatus from '../cmps/EmailStatus.jsx'
 import EmailFilter from '../cmps/EmailFilter.jsx'
 import EmailList from '../cmps/EmailList.jsx'
 import EmailSearchBar from '../cmps/EmailSearchBar.jsx'
+import EmailDetailsPage from '../pages/EmailDetailsPage.jsx'
 import eventBusService from '../../../services/eventBusService.js'
+
+const Router = ReactRouterDOM.HashRouter;
+const { Route, Switch } = ReactRouterDOM;
+const { createBrowserHistory } = History;
+const history = createBrowserHistory();
+// let { path } = useRouteMatch();
 
 export default class EmailApp extends React.Component {
 
@@ -33,20 +40,15 @@ export default class EmailApp extends React.Component {
     }
 
     onSetFilter = (filterBy) => {
-        this.setState(({filterBy: filterBy }), this.loadEmails);
+        this.setState(({ filterBy: filterBy }), this.loadEmails);
     }
 
     onCompose = () => {
         eventBusService.emit('toggle', true);
     }
 
-    onMarkAsUnread = (id) => {
-        eMailService.markAsUnread(id);
-        this.loadEmails();
-    }
-
-    onMarkAsRead = (id) => {
-        eMailService.markAsRead(id);
+    onToggleMarkAsRead = (id) => {
+        eMailService.toggleMarkAsRead(id);
         this.loadEmails();
     }
 
@@ -61,7 +63,7 @@ export default class EmailApp extends React.Component {
     }
 
     onSearchText = (searchText, filter) => {
-        this.setState(({searchText: searchText, filterBy: filter}), this.loadEmails);
+        this.setState(({ searchText: searchText, filterBy: filter }), this.loadEmails);
     }
 
     render() {
@@ -70,11 +72,20 @@ export default class EmailApp extends React.Component {
                 <div className="email-nav-bar flex column">
                     <div className="compose-button pointer" onClick={this.onCompose}>Compose +</div>
                     <EmailFilter onSetFilter={this.onSetFilter} />
-                    <EmailStatus eMails={this.state.eMails}/>
+                    <EmailStatus eMails={this.state.eMails} />
                 </div>
-                <EmailSearchBar eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter}/>
-                <EmailList eMails={this.state.eMails} onMarkAsUnread={this.onMarkAsUnread} onMarkAsRead={this.onMarkAsRead} 
-                           onDelete={this.onDelete} onImportant={this.onImportant}/>
+                <EmailSearchBar eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter} />
+                <Router history={history}>
+                <Switch>
+                    <Route exact path='/email'>
+                        <EmailList eMails={this.state.eMails} onToggleMarkAsRead={this.onToggleMarkAsRead}
+                            onDelete={this.onDelete} onImportant={this.onImportant} />
+                    </Route>
+                    <Route path={`/email/:id`}>
+                        <EmailDetailsPage />
+                    </Route>
+                </Switch>
+                </Router>
             </div>
         </React.Fragment>
     }

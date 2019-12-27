@@ -7,6 +7,7 @@ export default class EmailComposeForm extends React.Component {
     state = {
         eMail: {
             id: getRandomId(),
+            to:'',
             subject: '',
             body: '',
             isRead: false,
@@ -38,6 +39,7 @@ export default class EmailComposeForm extends React.Component {
         return <div className="compose-email-form">
             <form className="flex column center align-center">
             <div className="pointer" onClick={this.closeEmailMessage}>x</div>
+                <input type="text" placeholder="To" name="to" onChange={this.inputChange} value={this.state.eMail.to}></input>
                 <input type="text" placeholder="Subject" name="subject" onChange={this.inputChange} value={this.state.eMail.subject}></input>
                 <textarea rows="20" cols="30" placeholder="Type your message" name="body" onChange={this.inputChange} value={this.state.eMail.body}></textarea>
                 <button onClick={this.onEmailSend}>Send</button>

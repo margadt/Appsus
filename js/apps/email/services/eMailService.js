@@ -2,8 +2,8 @@ import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
 export default {
-    getEmails, getEmailById, getNewId, markAsRead, eMailSend,
-    getUnreadEmailsCount, markAsUnread, deleteEmail, toggleImportant,
+    getEmails, getEmailById, getNewId, eMailSend, markAsRead,
+    getUnreadEmailsCount, toggleMarkAsRead, deleteEmail, toggleImportant,
     getImportantEmailsCount, getEmailPercentageRead
 };
 
@@ -49,16 +49,16 @@ function findEmailIndex(id) {
     return gEmails.findIndex(gEmail => gEmail.id === id);
 }
 
-function markAsRead(id) {
+function toggleMarkAsRead(id) {
     let idx = findEmailIndex(id);
-    gEmails[idx].isRead = true;
+    gEmails[idx].isRead = !gEmails[idx].isRead;
     storageService.store(eMailKey, gEmails);
     return gEmails;
 }
 
-function markAsUnread(id) {
+function markAsRead(id) {
     let idx = findEmailIndex(id);
-    gEmails[idx].isRead = false;
+    gEmails[idx].isRead = true;
     storageService.store(eMailKey, gEmails);
     return gEmails;
 }
@@ -108,7 +108,7 @@ function getImportantEmailsCount() {
 
 function getEmailPercentageRead() {
     let unreadMails = getUnreadEmailsCount();
-    let eMailPercentageRead = ((unreadMails / gEmails.length) * 100);
+    let eMailPercentageRead = Math.round((unreadMails / gEmails.length) * 100);
     return eMailPercentageRead;
 }
 
@@ -143,34 +143,3 @@ function createEmails() {
     storageService.store(eMailKey, eMails);
     return eMails;
 }
-
-// function getEmails(filterBy) {
-//     let mails = [];
-//     switch (true) {
-//         case (filterBy === ''): {
-//             mails = [...gEmails];
-//             break;
-//         }
-//         case (filterBy === 'isRead'): {
-//             mails = gEmails.filter(gEmail => (!gEmail.isRead));
-//             break;
-//         }
-//         case (filterBy === 'isImportant'): {
-//             mails = gEmails.filter(gEmail => (gEmail.isImportant));
-//             break;
-//         }
-//         case (filterBy === 'isSent'): {
-//             mails = gEmails.filter(gEmail => (gEmail.isSent));
-//         }
-//     }
-//     return Promise.resolve(mails);
-// }
-
-// function searchEmail(searchText, filter) {
-//     const mails = getEmails(filter).then(mails => {
-//         return mails.filter(mail => 
-//             mail.subject.toLowerCase().includes(searchText.toLowerCase()));
-//     });
-//     console.log(mails);
-//     return Promise.resolve(mails);
-// }
