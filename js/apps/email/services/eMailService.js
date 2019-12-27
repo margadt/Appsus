@@ -1,14 +1,34 @@
 import storageService from "../../../services/storageService.js"
 import { getRandomId } from "../../../services/utils.js"
 
-export default { getEmails, getEmailById, getNewId, eMailRead, eMailSend, getUnreadEmailsCount, markAsUnread };
+export default {
+    getEmails, getEmailById, getNewId, markAsRead, eMailSend,
+    getUnreadEmailsCount, markAsUnread, deleteEmail, toggleImportant,
+    getImportantEmailsCount
+};
 
 const eMailKey = 'eMails'
 let gEmails = storageService.load(eMailKey) || createEmails();
 
 function getEmails(filterBy) {
-    const mails = (filterBy.isRead === '') ? [...gEmails] :
-        gEmails.filter(mail => { return mail.isRead === JSON.parse(filterBy.isRead)} );
+    let mails = [];
+    switch (true) {
+        case (filterBy === ''): {
+            mails = [...gEmails];
+            break;
+        }
+        case (filterBy === 'isRead'): {
+            mails = gEmails.filter(gEmail => (!gEmail.isRead));
+            break;
+        }
+        case (filterBy === 'isImportant'): {
+            mails = gEmails.filter(gEmail => (gEmail.isImportant));
+            break;
+        }
+        case (filterBy === 'isSent'): {
+            mails = gEmails.filter(gEmail => (gEmail.isSent));
+        }
+    }
     return Promise.resolve(mails);
 }
 
@@ -21,7 +41,7 @@ function findEmailIndex(id) {
     return gEmails.findIndex(gEmail => gEmail.id === id);
 }
 
-function eMailRead(id) {
+function markAsRead(id) {
     let idx = findEmailIndex(id);
     gEmails[idx].isRead = true;
     storageService.store(eMailKey, gEmails);
@@ -35,11 +55,24 @@ function markAsUnread(id) {
     return gEmails;
 }
 
+function deleteEmail(id) {
+    gEmails = gEmails.filter(gEmail => gEmail.id !== id);
+    storageService.store(eMailKey, gEmails);
+    return gEmails;
+}
+
+function toggleImportant(id) {
+    let idx = findEmailIndex(id);
+    gEmails[idx].isImportant = !gEmails[idx].isImportant;
+    storageService.store(eMailKey, gEmails);
+    return gEmails;
+}
+
 function getNewId(id, diff) {
     let idx = findEmailIndex(id);
     idx += diff;
-    if(idx < 0) idx = gEmails.length-1;
-    if(idx > gEmails.length-1) idx = 0;
+    if (idx < 0) idx = gEmails.length - 1;
+    if (idx > gEmails.length - 1) idx = 0;
     return gEmails[idx].id;
 }
 
@@ -50,12 +83,19 @@ function eMailSend(eMail) {
 }
 
 function getUnreadEmailsCount() {
-    let counter = 0;
-    gEmails.forEach(gEmail => {
-        if (gEmail.isRead === false) counter++
-    });
-    if (counter === 0) return '';
-    return counter;
+    let counter = gEmails.reduce((acc, email) => {
+        if (email.isRead === false) acc++;
+        return acc;
+    }, 0);
+    return (counter) ? counter : '';
+}
+
+function getImportantEmailsCount() {
+    let counter = gEmails.reduce((acc, email) => {
+        if (email.isImportant === true) acc++;
+        return acc;
+    }, 0);
+    return (counter) ? counter : '';
 }
 
 function createEmails() {
@@ -65,6 +105,7 @@ function createEmails() {
             subject: 'Hello',
             body: 'Is it me you\'re looking for?',
             isRead: false,
+            isImportant: false,
             sentAt: 1577269608218
         },
         {
@@ -72,6 +113,7 @@ function createEmails() {
             subject: 'Cause I wonder',
             body: 'where you are?',
             isRead: false,
+            isImportant: false,
             sentAt: 1577183208218
         },
         {
@@ -79,6 +121,7 @@ function createEmails() {
             subject: 'And I wonder',
             body: 'What you do',
             isRead: false,
+            isImportant: false,
             sentAt: 1545556808218
         }
     ]

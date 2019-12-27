@@ -11,6 +11,7 @@ export default class EmailComposeForm extends React.Component {
             body: '',
             isRead: false,
             isSent: true,
+            isImportant: false,
             sentAt: Date.now()
         }
     }

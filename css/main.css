@@ -1,5 +1,9 @@
 /* base */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
 }
@@ -37,6 +41,13 @@ a {
     margin-top: 10px;
 }
 
+/* eMail filter */
+
+.mail-filter-container *{
+    height: 40px;
+    margin-bottom: 20px;    
+}
+
 /* email preview */
 
 .email-preview-container {
@@ -51,7 +62,7 @@ a {
 }
 
 .email-list div:nth-child(even) {
-    background-color: grey;
+    background-color: lightgrey;
 }
 
 .email-preview-menu {

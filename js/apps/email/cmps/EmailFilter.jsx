@@ -2,23 +2,18 @@ import eMailService from '../services/eMailService.js'
 
 export default class EmailFilter extends React.Component {
 
-    changeInput = (event) => {
-        let field = (event.target.name);
-        let value = (event.target.value);
-        this.props.onSetFilter({ [field]: value });
-    }
-
-    onShowAll = () => {
-        this.props.onSetFilter({ isRead: '' });
+    changeInput = (filter) => {
+        this.props.onSetFilter(filter);
     }
 
     render() {
         return <React.Fragment>
-            <div className="mail-filer-container">
-                <div className ="pointer" onClick={this.onShowAll}>Inbox {eMailService.getUnreadEmailsCount()}</div>
-                <button onClick={this.changeInput} value={false} name='isRead'>Unread Messages</button>
-                <div>Sent Mail</div>
+            <div className="mail-filter-container">
+                <div className="pointer" onClick={() => this.changeInput('')}>Inbox {eMailService.getUnreadEmailsCount()}</div>
+                <div className="pointer" onClick={() => this.changeInput('isRead')}>Unread Messages</div>
+                <div className="pointer" onClick={() => this.changeInput('isImportant')}>important {eMailService.getImportantEmailsCount()}</div>
+                <div className="pointer" onClick={() => this.changeInput('isSent')}>Sent Mail</div>
             </div>
-        </React.Fragment>
+        </React.Fragment >
     }
 }
