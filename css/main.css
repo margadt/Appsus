@@ -166,6 +166,7 @@ a {
 
 .note{
     width: fit-content;
+    height: fit-content;
     border: 1px solid black;
 }
 

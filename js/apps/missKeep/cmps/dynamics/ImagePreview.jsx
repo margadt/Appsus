@@ -1,7 +1,11 @@
 export default class ImagePreview extends React.Component {
     state = {
-        hidden: false,
+        saveHidden: true,
         title: this.props.note.info.title
+    }
+
+    onSaveBtn = () => {
+        this.props.updateNote(this.props.note, this.state.title);
     }
 
     onSelectNote = () => {
@@ -10,24 +14,24 @@ export default class ImagePreview extends React.Component {
         }
     }
 
-    onDelBtnToggler = () => {
-        this.setState({ hidden: false });
+    emitChange = (ev) => {
+        ev.preventDefault();
+        this.setState({ title: ev.target.innerHTML });
     }
 
-    emitChange = (ev) => {
-        console.log('ev.pre');
-
-        this.setState({ title: ev.currentTarget.textContent })
+    onEvStopProp = (ev) => {
+        ev.stopPropagation();
+        this.setState({ saveHidden: false })
     }
 
 
     render() {
         const { note } = this.props;
         return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
-            <h2 contentEditable='true' onInput={this.emitChange} onClick={(ev)=>{ev.stopPropagation()}} suppressContentEditableWarning={true}>{note.info.title}</h2>
+            <h2 contentEditable='true' onInput={this.emitChange} onClick={this.onEvStopProp} suppressContentEditableWarning={true}>{note.info.title}</h2>
             <img src={note.info.url} alt='note-img' />
-            {!this.state.hidden && <button onClick={this.props.onDeleteNote} >x</button>}
+            <button onClick={this.props.onDeleteNote} >x</button>
+            {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div>
-
     }
 }
