@@ -227,6 +227,16 @@ input#search-mail {
     width: 40px;
 }
 
+.todos-container p{
+    display: inline-block;
+}
+
+.todos-date{
+    font-size: 0.8rem;
+}
+
+
+
 /* view helpers */
 
 .flex {
