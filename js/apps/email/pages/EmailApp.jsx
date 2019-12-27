@@ -8,8 +8,8 @@ import eventBusService from '../../../services/eventBusService.js'
 
 const Router = ReactRouterDOM.HashRouter;
 const { Route, Switch } = ReactRouterDOM;
-const { createBrowserHistory } = History;
-const history = createBrowserHistory();
+// const { createBrowserHistory } = History;
+// const history = createBrowserHistory();
 // let { path } = useRouteMatch();
 
 export default class EmailApp extends React.Component {
@@ -71,11 +71,11 @@ export default class EmailApp extends React.Component {
             <div className="main-container grid">
                 <div className="email-nav-bar flex column">
                     <div className="compose-button pointer" onClick={this.onCompose}>Compose +</div>
-                    <EmailFilter onSetFilter={this.onSetFilter} />
+                    <EmailFilter {...this.props} onSetFilter={this.onSetFilter} />
                     <EmailStatus eMails={this.state.eMails} />
                 </div>
-                <EmailSearchBar eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter} />
-                <Router history={history}>
+                <EmailSearchBar {...this.props} eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter} />
+                <Router>
                 <Switch>
                     <Route exact path='/email'>
                         <EmailList eMails={this.state.eMails} onToggleMarkAsRead={this.onToggleMarkAsRead}

@@ -1,4 +1,4 @@
-import { formatDate } from '../services/eMailUtils.js'
+import { formatDateEmailDetails } from '../services/eMailUtils.js'
 import EmailReply from '../cmps/EmailReply.jsx'
 
 export default class EmailDetails extends React.Component {
@@ -19,7 +19,7 @@ export default class EmailDetails extends React.Component {
                     <div className="nav-button pointer" onClick={() => this.props.changeEmailShown(1)}>Next</div>
                 </div> 
                 <div>Subject: {this.props.eMail.subject}</div>
-                <div>Received: {formatDate(this.props.eMail.sentAt)}</div>
+                <div>Received: {formatDateEmailDetails(this.props.eMail.sentAt)}</div>
                 <div>{this.props.eMail.body}</div>
                 {(this.state.reply) ? <EmailReply eMail={this.props.eMail}/> : ''}
             </div>
