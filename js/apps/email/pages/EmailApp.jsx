@@ -64,7 +64,7 @@ export default class EmailApp extends React.Component {
                 <div className="email-nav-bar flex column">
                     <div className="compose-button pointer" onClick={this.onCompose}>Compose +</div>
                     <EmailFilter onSetFilter={this.onSetFilter} />
-                    <EmailStatus />
+                    <EmailStatus eMails={this.state.eMails}/>
                 </div>
                 <EmailList eMails={this.state.eMails} onMarkAsUnread={this.onMarkAsUnread} onMarkAsRead={this.onMarkAsRead} 
                            onDelete={this.onDelete} onImportant={this.onImportant}/>

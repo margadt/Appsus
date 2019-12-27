@@ -4,7 +4,7 @@ import { getRandomId } from "../../../services/utils.js"
 export default {
     getEmails, getEmailById, getNewId, markAsRead, eMailSend,
     getUnreadEmailsCount, markAsUnread, deleteEmail, toggleImportant,
-    getImportantEmailsCount
+    getImportantEmailsCount, getEmailPercentageRead
 };
 
 const eMailKey = 'eMails'
@@ -96,6 +96,12 @@ function getImportantEmailsCount() {
         return acc;
     }, 0);
     return (counter) ? counter : '';
+}
+
+function getEmailPercentageRead() {
+    let unreadMails = getUnreadEmailsCount();
+    let eMailPercentageRead = ((unreadMails / gEmails.length) * 100);
+    return eMailPercentageRead;
 }
 
 function createEmails() {

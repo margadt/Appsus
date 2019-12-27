@@ -48,6 +48,26 @@ a {
     margin-bottom: 20px;    
 }
 
+/* eMail Status Bar */
+
+#my-progress {
+    width: 100px;
+    height: 30px;
+    background-color: lightgrey;
+}
+
+#my-bar {
+    height: 30px;
+    background-color: yellow;
+}
+
+#my-bar-text {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
 /* email preview */
 
 .email-preview-container {
