@@ -23,7 +23,8 @@ a {
     width: 95vw;
     min-height: 100vh;
     grid-template-columns: 200px auto;
-    grid-template-areas: "email-nav-bar email-preview-cont"
+    grid-template-rows: 70px auto;
+    grid-template-areas: "email-search-bar email-search-bar" "email-nav-bar email-preview-cont";
 }
 
 .header {
@@ -41,11 +42,32 @@ a {
     margin-top: 10px;
 }
 
+.email-search-bar {
+    grid-area: email-search-bar;
+    height: 70px;
+}
+
+/* eMail search-bar */
+
+input#search-mail {
+    background-image: url(../img/icons/search-14-48.png);
+    background-repeat: no-repeat;
+    background-size: 1.125rem;
+    background-position: 3px 3px;
+    text-indent: 25px;
+    width: 12.5rem;
+    height: 30px;
+}
+
+.search-bar-filter {
+    height: 30px;
+}
+
 /* eMail filter */
 
-.mail-filter-container *{
+.mail-filter-container * {
     height: 40px;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
 }
 
 /* eMail Status Bar */
@@ -184,25 +206,23 @@ a {
     margin-top: 10px;
 }
 
-.note{
+.note {
     width: fit-content;
     height: fit-content;
     border: 1px solid black;
 }
 
-.note img{
+.note img {
     width: 200px;
 }
 
-.pinned{
+.pinned {
     order: -1;
 }
 
-.pinned-img{
+.pinned-img {
     width: 40px;
 }
-
-
 
 /* view helpers */
 
