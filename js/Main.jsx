@@ -11,6 +11,10 @@ import EmailApp from './apps/email/pages/EmailApp.jsx'
 import KeepApp from './apps/missKeep/pages/KeepApp.jsx'
 import NavBar from './apps/cmps/NavBar.jsx'
 import EmailCompose from '../js/apps/email/cmps/EmailCompose.jsx'
+import BooksApp from './apps/MissBook/pages/BooksApp.jsx'
+import BookPage from './apps/MissBook/pages/BookPage.jsx'
+import BookAdd from './apps/MissBook/pages/BookAdd.jsx'
+
 
 
 class Main extends React.Component {
@@ -25,6 +29,9 @@ class Main extends React.Component {
                         <Route component={HomeApp} path='/' exact></Route>
                         <Route component={EmailApp} path='/email'></Route>
                         <Route component={KeepApp} path='/keep' exact></Route>
+                        <Route component={BooksApp} path='/book' exact></Route>
+                        <Route component={BookPage} path='/book/:bookId' exact></Route>
+                        <Route render={(props) => <BookAdd {...props} toggleModal={this.toggleModal} />} path='/addBook' exact></Route>
                     </Switch>
                 </Router>
             </main>
