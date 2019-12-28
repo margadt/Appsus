@@ -8,9 +8,6 @@ import eventBusService from '../../../services/eventBusService.js'
 
 const Router = ReactRouterDOM.HashRouter;
 const { Route, Switch } = ReactRouterDOM;
-// const { createBrowserHistory } = History;
-// const history = createBrowserHistory();
-// let { path } = useRouteMatch();
 
 export default class EmailApp extends React.Component {
 
@@ -19,7 +16,9 @@ export default class EmailApp extends React.Component {
     state = {
         eMails: [],
         filterBy: '',
-        searchText: ''
+        searchText: '',
+        currSortBy: 'sentAt',
+        prevSortBy: ''
     }
 
     componentDidMount() {
@@ -34,7 +33,7 @@ export default class EmailApp extends React.Component {
     }
 
     loadEmails = () => {
-        eMailService.getEmails(this.state.filterBy, this.state.searchText).then(eMails => {
+        eMailService.getEmails(this.state.filterBy, this.state.searchText, this.state.currSortBy, this.state.prevSortBy).then(eMails => {
             return this.setState({ eMails });
         })
     }
@@ -66,6 +65,10 @@ export default class EmailApp extends React.Component {
         this.setState(({ searchText: searchText, filterBy: filter }), this.loadEmails);
     }
 
+    onSortBy = (sortBy) => {
+        this.setState(({ prevSortBy: this.state.currSortBy, currSortBy: sortBy}), this.loadEmails);
+    }
+
     render() {
         return <React.Fragment>
             <div className="main-container grid">
@@ -74,16 +77,17 @@ export default class EmailApp extends React.Component {
                     <EmailFilter {...this.props} onSetFilter={this.onSetFilter} />
                     <EmailStatus eMails={this.state.eMails} />
                 </div>
-                <EmailSearchBar {...this.props} eMails={this.state.eMails} onSearchText={this.onSearchText} onSetFilter={this.onSetFilter} />
+                <EmailSearchBar {...this.props} eMails={this.state.eMails} onSearchText={this.onSearchText}
+                    onSetFilter={this.onSetFilter} onSortBy={this.onSortBy} />
                 <Router>
-                <Switch>
-                    <Route exact path='/email'>
-                        <EmailList eMails={this.state.eMails} onToggleMarkAsRead={this.onToggleMarkAsRead}
-                            onDelete={this.onDelete} onImportant={this.onImportant} />
-                    </Route>
-                    <Route path={`/email/:id`} render={(props) => <EmailDetailsPage {...props}/>}>
-                    </Route>
-                </Switch>
+                    <Switch>
+                        <Route exact path='/email'>
+                            <EmailList {...this.props} eMails={this.state.eMails} onToggleMarkAsRead={this.onToggleMarkAsRead}
+                                onDelete={this.onDelete} onImportant={this.onImportant} />
+                        </Route>
+                        <Route path={`/email/:id`} render={(props) => <EmailDetailsPage {...props} />}>
+                        </Route>
+                    </Switch>
                 </Router>
             </div>
         </React.Fragment>

@@ -7,10 +7,10 @@ export default {
     getImportantEmailsCount, getEmailPercentageRead
 };
 
-const eMailKey = 'eMails'
+const eMailKey = 'eMails';
 let gEmails = storageService.load(eMailKey) || createEmails();
 
-function getEmails(filterBy, searchText) {
+function getEmails(filterBy, searchText, currSortBy, prevSortBy) {
     let mails = searchEmail(searchText);
     switch (true) {
         case (filterBy === ''): {
@@ -28,6 +28,7 @@ function getEmails(filterBy, searchText) {
             mails = mails.filter(mail => (mail.isSent));
         }
     }
+    mails = sortEmails(mails, currSortBy, prevSortBy);
     return Promise.resolve(mails);
 }
 
@@ -38,6 +39,38 @@ function searchEmail(searchText) {
     } else {
         return mails.filter(mail => mail.subject.toLowerCase().includes(searchText.toLowerCase()));
     }
+}
+
+function sortEmails(mails, currSortBy, prevSortBy) {
+    console.log('mails: ', mails);
+    if (currSortBy === 'subject') {
+        mails = mails.sort((eMail1, eMail2) => {
+            let result = (eMail1[currSortBy].toLowerCase() > eMail2[currSortBy].toLowerCase()) ? -1 : (eMail1[currSortBy].toLowerCase() < eMail2[currSortBy].toLowerCase()) ? 1 : 0;
+            return result;
+        });
+    } else {
+        mails = mails.sort((eMail1, eMail2) => {
+            let result = (eMail1[currSortBy] > eMail2[currSortBy]) ? -1 : (eMail1[currSortBy] < eMail2[currSortBy]) ? 1 : 0;
+            return result;
+        });
+    }
+    console.log('mails: ', mails);
+    console.log('curr: ', currSortBy);
+    console.log('prev: ', prevSortBy);
+
+    // console.log('currSortBy: ', currSortBy);
+    // console.log('prevSortBy: ', prevSortBy);
+    // console.log(mails);
+    // if (currSortBy === prevSortBy) {
+    //     console.log('reverse');
+    //     mails = [...mails.reverse()];
+    //     console.log(reversedMails)
+    //     return mails;
+    // } else {
+    //     console.log('notReverse');
+    //     return mails;
+    // }
+    return (currSortBy === prevSortBy) ? mails = [...mails.reverse()] : mails;
 }
 
 function getEmailById(id) {
@@ -143,3 +176,24 @@ function createEmails() {
     storageService.store(eMailKey, eMails);
     return eMails;
 }
+
+// function sortEmails(mails, sortBy) {
+//     console.log('before sort', mails);
+//     let reversedMails;
+//     if (gSort === sortBy) {
+//         reversedMails = mails.reverse();
+//         gSort = sortBy;
+//         console.log('sortBy: ', sortBy);
+//         console.log('reverse', mails);
+//         return reversedMails;
+//     } else {
+//         mails.sort((eMail1, eMail2) => {
+//             let result = (eMail1[sortBy] > eMail2[sortBy]) ? -1 : (eMail1[sortBy] < eMail2[sortBy]) ? 1 : 0;
+//             return result;
+//         });
+//         gSort = sortBy;
+//         console.log('sortBy: ', sortBy);
+//         console.log('mails: ', mails);
+//         return mails;
+//     }
+// }

@@ -1,5 +1,5 @@
 export default class EmailSearchBar extends React.Component {
-
+    
     state = {
         searchText: '',
         filter: ''
@@ -14,6 +14,12 @@ export default class EmailSearchBar extends React.Component {
             this.setState(({filter: value}), () => this.props.onSearchText(this.state.searchText, this.state.filter));
     }
 
+    sortBy = (event) => {
+        this.props.history.push('/email/');
+        let sortBy = event.target.value;
+        this.props.onSortBy(sortBy);
+    }
+
     render() {
         return <React.Fragment>
             <div className='email-search-bar flex center'>
@@ -25,6 +31,11 @@ export default class EmailSearchBar extends React.Component {
                     <option value='isImportant'>Important</option>
                     <option value='isSent'>Sent Mail</option>
                 </select>
+                <div>
+                    <span>Sort by:</span>
+                        <button value='subject' onClick={this.sortBy}>Subject</button>
+                        <button value='sentAt' onClick={this.sortBy}>Date</button>
+                </div>
             </div>
         </React.Fragment>
             }

@@ -19,7 +19,7 @@ export default class EmailPreview extends React.Component {
         event.preventDefault();
         let id = event.target.id;
         this.props.onDelete(id);
-    } 
+    }
 
     onImportant = (event) => {
         event.preventDefault();
@@ -27,20 +27,29 @@ export default class EmailPreview extends React.Component {
         this.props.onImportant(id);
     }
 
-    isItReadOrUnread = (isRead) => {
-       return (isRead) ? 'Unread' : 'Read';
+    isItReadOrUnread = () => {
+        event.preventDefault();
+        const isRead = this.props.eMail.isRead;
+        return (isRead) ? 'far fa-envelope' : 'far fa-envelope-open';
     }
-    
+
+    isItImportant = (isImportant) => {
+        event.preventDefault();
+        return (isImportant) ? <i className="fas fa-star"></i> : <i className="far fa-star"></i>;
+    }
+
     render() {
         const { props } = this;
         return <React.Fragment>
             <div className={` email-preview-container dynamic-comp flex column ${this.isUnread()}`}>
-                <Link className="flex space-between" to={`/email/${props.eMail.id}`}>
-                    <button onClick={this.onImportant} id={props.eMail.id}>star</button>
-                    <span className="subject">Subject: {props.eMail.subject} </span>
-                    <button onClick={this.onToggleMarkAsRead} id={props.eMail.id}>Mark as {this.isItReadOrUnread(props.eMail.isRead)}</button>
-                    <button onClick={this.onDelete} id={props.eMail.id}>Delete</button>
-                    <span className="received">{formatDate(props.eMail.sentAt)}</span>
+                <Link className="flex space-between" to={`/email/${this.props.eMail.id}`}>
+                    <button onClick={this.onImportant} id={this.props.eMail.id}>are {this.isItImportant(this.props.eMail.isImportant)}</button>
+                    <span className="subject">Subject: {this.props.eMail.subject} </span>
+                    {/* <button onClick={this.onToggleMarkAsRead} id={props.eMail.id}>Mark as {this.isItReadOrUnread(props.eMail.isRead)}</button> */}
+                    <button onClick={this.onToggleMarkAsRead} id={this.props.eMail.id}>mark as <i className={this.isItReadOrUnread()}></i></button>
+                    {/* <div onClick={this.onToggleMarkAsRead} id={this.props.eMail.id}><i className={this.isItReadOrUnread()}></i></div> */}
+                    <button onClick={this.onDelete} id={this.props.eMail.id}><i className="far fa-trash-alt"></i></button>
+                    <span className="received">{formatDate(this.props.eMail.sentAt)}</span>
                 </Link>
             </div>
         </React.Fragment>

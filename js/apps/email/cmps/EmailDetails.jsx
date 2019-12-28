@@ -21,7 +21,7 @@ export default class EmailDetails extends React.Component {
                 <div>Subject: {this.props.eMail.subject}</div>
                 <div>Received: {formatDateEmailDetails(this.props.eMail.sentAt)}</div>
                 <div>{this.props.eMail.body}</div>
-                {(this.state.reply) ? <EmailReply eMail={this.props.eMail}/> : ''}
+                {(this.state.reply) ? <EmailReply {...this.props} eMail={this.props.eMail}/> : ''}
             </div>
         </React.Fragment>
     }
