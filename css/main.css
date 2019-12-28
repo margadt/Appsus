@@ -1,3 +1,13 @@
+@font-face {
+    font-family: hind;
+    src: url(../fonts/Hind-Regular.ttf)
+}
+
+@font-face {
+    font-family: handlee;
+    src: url(../fonts/Handlee-Regular.ttf)
+}
+
 /* base */
 
 * {
@@ -6,6 +16,7 @@
 
 body {
     margin: 0;
+    font-family: hind, sans-serif;
 }
 
 a {
@@ -20,8 +31,9 @@ a {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    width: 95vw;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    background-color: lightsteelblue;
     grid-template-columns: 200px auto;
     grid-template-rows: 70px auto;
     grid-template-areas: "email-search-bar email-search-bar" "email-nav-bar dynamic-comp";
@@ -35,23 +47,45 @@ a {
     width: 100%;
 }
 
+/* email nav bar */
+
 .email-nav-bar {
-    height: 50px;
-    width: 100px;
+    height: 400px;
+    width: 180px;
     grid-area: email-nav-bar;
-    margin-left: 30px;
+    margin: 10px;
+    background-color: lightgrey;
+    border-radius: 20px;
 }
 
-.email-nav-bar:first-child {
-    margin-top: 10px;
+.inbox-nav-bar:hover, .unread-nav-bar:hover, .important-nav-bar:hover, .sent-nav-bar:hover {
+    background-color: black;
+    color: lightgrey;
+    border-radius: 20px;
 }
+
+.compose-button {
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+.compose-button:hover {
+    background-color: black;
+    color: lightgrey;
+}
+
+/* eMail search-bar */
 
 .email-search-bar {
     grid-area: email-search-bar;
     height: 70px;
+    border-bottom: 2px solid lightgrey;
 }
-
-/* eMail search-bar */
 
 input#search-mail {
     background-image: url(../img/icons/search-14-48.png);
@@ -61,30 +95,85 @@ input#search-mail {
     text-indent: 25px;
     width: 12.5rem;
     height: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: inherit;
+    outline: none;
 }
 
 .search-bar-filter {
+    width: 120px;
     height: 30px;
+    margin-right: 25px;
+    font-family: inherit;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
+.subject-sort-button {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+}
+
+.subject-sort-button:hover {
+    background-color: black;
+    color: lightgrey;
+}
+
+.sentat-sort-button {
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+}
+
+.sentat-sort-button:hover {
+    background-color: black;
+    color: lightgrey;
 }
 
 /* eMail filter */
 
 .mail-filter-container * {
     height: 40px;
-    margin-bottom: 20px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+    line-height: 40px;
 }
 
 /* eMail Status Bar */
 
+.my-progress-container {
+    padding: 10px;
+    border: 10px;
+    height: 50px;
+    width: 120px;
+}
+
 #my-progress {
     width: 100px;
     height: 30px;
-    background-color: lightgrey;
+    background-color: lightgreen;
+    border-radius: 10px;
 }
 
 #my-bar {
     height: 30px;
-    background-color: yellow;
+    background-color: rgb(57, 255, 20);
+    border-radius: 10px;
 }
 
 #my-bar-text {
@@ -92,6 +181,7 @@ input#search-mail {
     height: 30px;
     line-height: 30px;
     text-align: center;
+    border-radius: 10px;
 }
 
 /* email preview */
@@ -100,18 +190,28 @@ input#search-mail {
     width: 100%;
     line-height: 30px;
     height: 30px;
+    border: 10px;
 }
 
 .email-preview-container:first-child {
     margin-top: 10px;
 }
 
-.email-list div:nth-child(even) {
-    background-color: lightgrey;
+.email-preview-container:hover {
+    background-color: lightgoldenrodyellow;
 }
 
-.email-preview-menu {
-    display: none;
+.row:nth-child(even):hover {
+    background-color: lightgoldenrodyellow;
+}
+
+.email-list {
+    border: 10px;
+}
+
+.row:nth-child(even) {
+    background-color: lightgrey;
+    border-radius: 5px;
 }
 
 .preview-check {
@@ -120,17 +220,14 @@ input#search-mail {
     line-height: 30px;
 }
 
-.edit-menu {
-    height: 30px;
-}
-
-.show {
-    display: flex;
-}
-
-.subject {
+.from-preview {
+    width: 150px;
     padding-left: 10px;
-    width: 300px;
+}
+
+.subject-preview {
+    padding-left: 10px;
+    width: 350px;
 }
 
 .received {
@@ -142,27 +239,75 @@ input#search-mail {
     font-weight: 700;
 }
 
-/* email compose */
-
-.compose-button {
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    width: 150px;
-    border-radius: 20px;
-    border: 2px solid black;
-    margin-top: 6px;
+.icons-container-preview {
+    width: 70px;
 }
+
+.icon-container {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+/* email compose */
 
 .compose-email-form {
     position: fixed;
     bottom: 0;
-    right: 0;
+    right: 100px;
     z-index: 1;
     background-color: white;
-    height: 400px;
-    width: 300px;
+    height: 500px;
+    width: 700px;
     border: 1px solid grey;
+}
+
+.message-header {
+    height: 30px;
+    background-color: slategrey;
+    color: lightgrey;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+.close-button {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.to, .subject-compose {
+    font-family: inherit;
+    width: inherit;
+    padding-left: 10px;
+    height: 40px;
+    outline: none;
+}
+
+.body {
+    outline: none;
+    resize: none;
+    overflow: auto;
+    font-family: inherit;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.message-footer {
+    height: 70px;
+    background-color: slategrey;
+    color: lightgrey;
+    line-height: 30px;
+    padding-right: 10px;
+}
+
+.send-button {
+    height: 30px;
+    width: 100px;
+    background-color: lightgrey;
+    color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
 }
 
 /* email details */
@@ -192,27 +337,131 @@ input#search-mail {
     margin-right: 20px;
 }
 
+.email-body-details {
+    text-align: justify;
+    width: 500px;
+}
+
 /* missKeep */
 
+/* header */
+
 .note-header {
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    background-color: lightsteelblue;
 }
 
 .logo {
     width: 50px;
+    margin-left: 30px;
+}
+
+.notes-search {
+    background-image: url(../img/icons/search-14-48.png);
+    background-repeat: no-repeat;
+    background-size: 1.125rem;
+    background-position: 3px 3px;
+    text-indent: 25px;
+    width: 12.5rem;
+    height: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: inherit;
+    outline: none;
+}
+
+.go {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+.notes-search-filter {
+    width: 120px;
+    height: 30px;
+    margin-right: 25px;
+    font-family: inherit;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
+.menuBtn {
+    margin-right: 30px;
+    text-align: center;
+    height: 30px;
+    width: 90px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+/* input menu */
+
+.input-menu {
+    background-color: lightsteelblue;
+    height: 40px;
+}
+
+.text-input {
+    text-indent: 25px;
+    width: 12.5rem;
+    height: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: inherit;
+    outline: none;
+}
+
+.add-note {
+    margin-left: 30px;
+    text-align: center;
+    height: 30px;
+    width: 60px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+.radio {
+    background-color: lightgrey;
+    color: black;
+    padding: none;
+    border: none;
 }
 
 .note-list-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 10px;
+    padding-top: 10px;
+    background-color: lightsteelblue;
 }
 
 .note {
     width: fit-content;
     height: fit-content;
-    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid lightgrey;
+    border-radius: 20px;
 }
 
 .note img {
@@ -343,9 +592,9 @@ input#search-mail {
     display: grid;
 }
 
-.border {
+/* .border {
     border: 1px solid black;
-}
+} */
 
 /* style helpers */
 

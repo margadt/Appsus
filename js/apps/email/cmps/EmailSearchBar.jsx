@@ -22,7 +22,7 @@ export default class EmailSearchBar extends React.Component {
 
     render() {
         return <React.Fragment>
-            <div className='email-search-bar flex center'>
+            <div className='email-search-bar flex center align-center'>
                 <input type='text' id='search-mail' name='search-mail' placeholder='Search Mail' 
                        value={this.props.searchText} onChange={this.searchText}/>
                 <select name='filter' className='search-bar-filter' onChange={this.searchText}>
@@ -33,8 +33,8 @@ export default class EmailSearchBar extends React.Component {
                 </select>
                 <div>
                     <span>Sort by:</span>
-                        <button value='subject' onClick={this.sortBy}>Subject</button>
-                        <button value='sentAt' onClick={this.sortBy}>Date</button>
+                        <button className='subject-sort-button pointer' value='subject' onClick={this.sortBy}>Subject</button>
+                        <button className='sentat-sort-button pointer' value='sentAt' onClick={this.sortBy}>Date</button>
                 </div>
             </div>
         </React.Fragment>

@@ -27,9 +27,9 @@ export default class TextPreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
+            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.props.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
             <p contentEditable='true' onInput={this.emitChange} onClick={this.onEvStopProp} suppressContentEditableWarning={true}> {note.info.txt}</p>
-            <button onClick={this.props.onDeleteNote} >x</button>
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div >
     }

@@ -37,12 +37,16 @@ export default class EmailComposeForm extends React.Component {
 
     render() {
         return <div className="compose-email-form">
-            <form className="flex column center align-center">
-            <div className="pointer" onClick={this.closeEmailMessage}>x</div>
-                <input type="text" placeholder="To" name="to" onChange={this.inputChange} value={this.state.eMail.to}></input>
-                <input type="text" placeholder="Subject" name="subject" onChange={this.inputChange} value={this.state.eMail.subject}></input>
-                <textarea rows="20" cols="30" placeholder="Type your message" name="body" onChange={this.inputChange} value={this.state.eMail.body}></textarea>
-                <button onClick={this.onEmailSend}>Send</button>
+            <form className="flex column">
+                <div className="message-header flex space-between">New Message
+                <i className="far fa-times-circle pointer close-button flex-end" onClick={this.closeEmailMessage}></i>
+                </div>
+                <input type="text" className="to" placeholder="To" name="to" onChange={this.inputChange} value={this.state.eMail.to}></input>
+                <input type="text" className="subject-compose" placeholder="Subject" name="subject" onChange={this.inputChange} value={this.state.eMail.subject}></input>
+                <textarea className="body" rows="15" cols="30" placeholder="Type your message" name="body" onChange={this.inputChange} value={this.state.eMail.body}></textarea>
+                <div className="message-footer flex flex-end align-center">
+                    <button className="send-button" onClick={this.onEmailSend}>Send</button>
+                </div>
             </form>
         </div>
     }

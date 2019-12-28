@@ -36,6 +36,7 @@ export default class TodosPreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote} >
+            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.props.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
             < h1 name='label' contentEditable='true' onInput={this.emitChangeLabel} onClick={this.onEvStopProp} suppressContentEditableWarning={true} > {note.info.label}</h1 >
             <hr />
@@ -46,7 +47,6 @@ export default class TodosPreview extends React.Component {
                 >{todo.txt}</p> <p className='todos-date'>at {date}</p></div>
             })
             }
-            < button onClick={this.props.onDeleteNote} > x</button >
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div>
     }

@@ -27,10 +27,10 @@ export default class VideoPreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
+            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.props.onDeleteNote}></i>
             {note.isPinned && <h1>📌</h1>}
             <h2 contentEditable='true' onInput={this.emitChange} onClick={this.onEvStopProp} suppressContentEditableWarning={true}>{note.info.title}</h2>
             <iframe type='text/html' width="250" height="140.625" src={note.info.url}></iframe>
-            <button onClick={this.props.onDeleteNote}>x</button>
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div>
     }

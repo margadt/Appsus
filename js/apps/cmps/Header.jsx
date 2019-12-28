@@ -19,15 +19,19 @@ export default class Header extends React.Component {
     render() {
         return <div className='note-header flex space-between border'>
             <img className='logo' src='../../../img/temp-logo.png' />
-            <div className="filter-bar">
-                <input name='title' onChange={this.changeInput} value={this.state.filterBy.title} type='text' placeholder={this.props.placeHolder} />
-                <button onClick={this.onFilterClick}>Go!</button>
+            <div className="filter-bar flex align-center">
+                <input className='notes-search' name='title' onChange={this.changeInput} value={this.state.filterBy.title} type='text' placeholder={this.props.placeHolder} />
+                <button className='go pointer' onClick={this.onFilterClick}>Go!</button>
             </div>
-            <select name='search-filter'>
+            <div className='flex align-center'>
+            <select className='notes-search-filter pointer' name='search-filter'>
                 <option value='all'>All</option>
                 <option value='done'>Done</option>
             </select>
-            <button>menuBtn</button>
+            </div>
+            <div className='flex align-center'>
+            <button className='menuBtn pointer'>menuBtn</button>
+            </div>
         </div>
     }
 }

@@ -26,13 +26,13 @@ export default class AddNoteInput extends React.Component {
     }
 
     render() {
-        return <div className='flex center border'>
-            <input name='input' type="text" placeholder={this.state.placeHolder} onChange={this.setType} value={this.state.input} />
-            <input type="radio" name="type" value="NoteText" onChange={this.setType} />Text
-            <input type="radio" name="type" value="NoteImg" onChange={this.setType} />Img
-            <input type="radio" name="type" value="NoteTodos" onChange={this.setType} />Todos
-            <input type="radio" name="type" value="NoteVideo" onChange={this.setType} />Video
-            <button onClick={this.onAddNote}>Add</button>
+        return <div className='flex center border input-menu'>
+            <input className='text-input' name='input' type="text" placeholder={this.state.placeHolder} onChange={this.setType} value={this.state.input} />
+            <input className='pointer radio' type="radio" name="type" value="NoteText" onChange={this.setType} />Text
+            <input className='pointer radio' type="radio" name="type" value="NoteImg" onChange={this.setType} />Img
+            <input className='pointer radio' type="radio" name="type" value="NoteTodos" onChange={this.setType} />Todos
+            <input className='pointer radio' type="radio" name="type" value="NoteVideo" onChange={this.setType} />Video
+            <button className='add-note pointer' onClick={this.onAddNote}>Add</button>
         </div>
     }
 }

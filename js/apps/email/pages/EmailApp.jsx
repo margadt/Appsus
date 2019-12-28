@@ -72,7 +72,7 @@ export default class EmailApp extends React.Component {
     render() {
         return <React.Fragment>
             <div className="main-container grid">
-                <div className="email-nav-bar flex column">
+                <div className="email-nav-bar flex column align-center">
                     <div className="compose-button pointer" onClick={this.onCompose}>Compose +</div>
                     <EmailFilter {...this.props} onSetFilter={this.onSetFilter} />
                     <EmailStatus eMails={this.state.eMails} />
