@@ -6,6 +6,7 @@ export default class EmailSearchBar extends React.Component {
     }
 
     searchText = (event) => {
+        this.props.history.push('/email/');
         let field = event.target.name;
         let value = event.target.value;
         (field === 'search-mail') ? 
