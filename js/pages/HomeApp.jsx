@@ -5,7 +5,7 @@ export default class Home extends React.Component {
             <React.Fragment>
                 <div className='main-page-container flex center'>
                     <div className="main-title flex column align-center">
-                        <img src='../../img/main-logo-1.png' />
+                        <img src='../img/main-logo-1.png' />
                     <span className='title-container'>Appsus</span>
                 </div>
                 </div>
