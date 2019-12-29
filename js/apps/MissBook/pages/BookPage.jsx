@@ -1,4 +1,4 @@
-import { getBookById, addReview, deleteReview } from '../services/booksServices.js'
+import { getBookById, addReview, deleteReview, getNewId } from '../services/booksServices.js'
 import BookDetails from '../cmps/books/BookDetails.jsx'
 
 export default class BookPage extends React.Component {
@@ -15,7 +15,7 @@ export default class BookPage extends React.Component {
         }
     }
 
-    loadBook() {
+    loadBook = () => {
         const { bookId } = this.props.match.params;
         getBookById(bookId).then(book => this.setState({ book }));
     }
@@ -35,9 +35,15 @@ export default class BookPage extends React.Component {
         deleteReview(this.state.book, reviewIdx).then(() => this.loadBook());
     }
 
+    changeBook = (diff) => {
+        const { id } = this.props.match.params;
+        const newId = getNewId(id, diff);
+        this.props.history.push(`/book/${newId}`);
+    }
+
     render() {
         if (!this.state.book) return <div className="loading">Loading...</div>
-        return <BookDetails book={this.state.book} onAddReview={this.onAddReview} goBack={this.goBack} onDeleteBtn={this.onDeleteBtn}></BookDetails>
+        return <BookDetails book={this.state.book} onAddReview={this.onAddReview} goBack={this.goBack} onDeleteBtn={this.onDeleteBtn} changeBook={this.changeBook}></BookDetails>
 
     }
 }

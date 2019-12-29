@@ -7,18 +7,35 @@
 .main-title {
     padding-top: 20px;
     font-family: pacifico;
-    font-size: 78px;
-    width: 650px;
-    height: 650px;
+    font-size: 70px;
+    width: 550px;
+    height: 550px;
     border: 10px solid black;
     border-radius: 20px;
     background-color: lightgray;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .title-container {
     text-align: center;
     padding-top: 20px;
-    height: 200px;
+    height: 150px;
     width: 100%;
+}
+
+@media (max-width: 576px) {
+
+    .main-title {
+        padding-top: 20px;
+        font-family: pacifico;
+        font-size: 48px;
+        width: 360px;
+        height: 500px;
+        border: 10px solid black;
+        border-radius: 20px;
+        background-color: lightgray;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }

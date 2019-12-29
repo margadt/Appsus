@@ -1,6 +1,6 @@
 import Books from '../data/data-books.js';
 import storageService from '../../../services/storageService.js';
-export { getBooks, getBookById, addReview, deleteReview, addBook };
+export { getBooks, getBookById, addReview, deleteReview, addBook, getNewId };
 
 let gBooks = storageService.load('books') || Books();
 
@@ -54,6 +54,14 @@ function addBook(book) {
     storageService.store('books', gBooks);
     return Promise.resolve(newBook.id);
 }
+
+function getNewId(id, diff) {
+    let idx = getBookIdxById(id)
+    idx += diff;
+    if (idx < 0) idx = gBooks.length-1;
+    if (idx > gBooks.length-1) idx = 0;
+    return gBooks[idx].id;
+  }
 
 function formatBook(book) {
     return {

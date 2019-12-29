@@ -14,6 +14,7 @@ import EmailCompose from '../js/apps/email/cmps/EmailCompose.jsx'
 import BooksApp from './apps/MissBook/pages/BooksApp.jsx'
 import BookPage from './apps/MissBook/pages/BookPage.jsx'
 import BookAdd from './apps/MissBook/pages/BookAdd.jsx'
+import Footer from './apps/cmps/Footer.jsx'
 
 
 
@@ -33,6 +34,7 @@ class Main extends React.Component {
                         <Route component={BookPage} path='/book/:bookId' exact></Route>
                         <Route component={BookAdd} path='/addBook' exact></Route>
                     </Switch>
+                    <Footer />
                 </Router>
             </main>
         )

@@ -11,7 +11,7 @@ export default class InboxEmailDetails extends React.Component {
 
     render() {
         return <React.Fragment>
-            <div className='dynamic-comp'>
+            <div className='dynamic-comp email-details-container'>
                 <div className='flex column align-center'>
                     <div className="nav-buttons-container flex align-center">
                         <div className="nav-button pointer" onClick={this.onReply}>Reply</div>

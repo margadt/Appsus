@@ -177,16 +177,6 @@ function createEmails() {
         },
         {
             id: getRandomId(),
-            from: 'Hashim Roberson',
-            fromEmail: 'hashrob@gmail.com',
-            subject: 'Ci Vediamo!!!!!',
-            body: 'Dispatched entreaties boisterous say why stimulated. Certain forbade picture now prevent carried she get see sitting. Up twenty limits as months. Inhabit so perhaps of in to certain. Sex excuse chatty was seemed warmth. Nay add far few immediate sweetness earnestly dejection.',
-            isRead: false,
-            isImportant: false,
-            sentAt: 1572739532840
-        },
-        {
-            id: getRandomId(),
             from: 'Chandler Lindsay',
             fromEmail: 'chnlind@gmail.com',
             subject: 'Another One Bites The Dust',
@@ -194,16 +184,6 @@ function createEmails() {
             isRead: false,
             isImportant: false,
             sentAt: 1570225796355
-        },
-        {
-            id: getRandomId(),
-            from: 'Lillith May',
-            fromEmail: 'lilmay@gmail.com',
-            subject: 'Coming Friday, December 6th... The Confession Killer',
-            body: 'Ignorant saw her her drawings marriage laughter. Case oh an that or away sigh do here upon. Acuteness you exquisite ourselves now end forfeited. Enquire ye without it garrets up himself. Interest our nor received followed was. Cultivated an up solicitude mr unpleasant. ',
-            isRead: false,
-            isImportant: false,
-            sentAt: 1560947970826
         },
         {
             id: getRandomId(),

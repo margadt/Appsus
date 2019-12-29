@@ -96,3 +96,10 @@ a {
     padding: 0;
     list-style-type: none;
 }
+
+/* mobile-view */
+
+@media (max-width: 576px) {
+    html {
+        font-size: 15px;
+    }

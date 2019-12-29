@@ -15,10 +15,23 @@
     margin-right: 30px;
 }
 
-.nav-bar-icon-container:hover { 
-    color:lightgray;
+.nav-bar-icon-container:hover {
+    color: lightgray;
 }
 
 .active {
-    color:lightgray;
+    color: lightgray;
+}
+
+@media (max-width: 576px) {
+
+    .nav-bar-container {
+        height: 80px;    
+    }
+
+    .nav-bar-icon-container {
+        font-size: 3.375rem;
+        height: 4rem;
+        width: 4rem;
+    }
 }

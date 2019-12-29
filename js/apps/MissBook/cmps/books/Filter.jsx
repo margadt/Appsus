@@ -17,14 +17,19 @@ export default class Filter extends React.Component {
     }
 
     render() {
-        return <div>
-            <input type="text" placeholder="Book title" value={this.state.filterBy.title}
-                onChange={this.changeInput} name="title"></input>
-            <input type="text" placeholder="Price less Than"
-                value={this.state.filterBy.price} name="price"
-                onChange={this.changeInput}></input>
-
-            <button onClick={this.onFilterClick}>Filter</button>
+        return <div className="book-search-bar flex center">
+            <div className="input-container">
+                <input className='book-search' type="text" placeholder="Book title" value={this.state.filterBy.title}
+                    onChange={this.changeInput} name="title"></input>
+            </div>
+            <div className="input-container">
+                <input className='price-search' type="text" placeholder="Price less Than"
+                    value={this.state.filterBy.price} name="price"
+                    onChange={this.changeInput}></input>
+            </div>
+            <div className="input-container">
+            <button className='filter-button pointer' onClick={this.onFilterClick}>Filter</button>
+            </div>
 
         </div>
     }

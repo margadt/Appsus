@@ -1,8 +1,8 @@
-import BookPreview from "./BookPreview.jsx";
 import AuthorsList from "./AuthorsList.jsx";
 import CategoryList from "./CategoryList.jsx";
 import LongTxt from "./LongTxt.jsx";
 import Reviews from "./Reviews.jsx";
+import { setPriceClass, isOnSale, formatCurrency } from '../../services/booksDetailsServices.js'
 // const { Link } = ReactRouterDOM;
 
 export default class BookDetails extends React.Component {
@@ -80,27 +80,48 @@ export default class BookDetails extends React.Component {
         this.setState(prev => ({ isLongTxtShown: !prev.isLongTxtShown }));
     }
 
+    formatLanguage = () => {
+        const language = this.props.book.language;
+        switch (true) {
+            case (language === 'he'):
+                return 'Hebrew';
+            case (language === 'en'):
+                return 'English';
+            case (language === 'sp'):
+                return 'Spanish';
+        }
+    }
+
     render() {
         const { props } = this;
 
-        return <div className="book-container">
-            <BookPreview book={this.props.book} class={this.state.class} ></BookPreview>
-            <img src={props.book.thumbnail} />
-            <p>ID: {props.book.id}</p>
-            <p>Authors: <AuthorsList book={this.props.book} /></p>
-            <p>Language: {props.book.language}</p>
-            <p>Published: {this.state.publishedDate}</p>
-            <p>Subtitle: {props.book.subtitle}</p>
-            <p>Description: <LongTxt text={props.book.description} isLongTxtShown={this.state.isLongTxtShown} />
-                <span className="long-text" onClick={this.onLngTxtToggle}>{this.state.isLongTxtShown ?
-                    'less' : 'more'}</span></p>
-            <p>Page Count: {props.book.pageCount} - {this.state.pageCount}</p>
-            <p>Categories: <CategoryList book={this.props.book} /></p>
-            {this.state.isOnSale ? '' : <h1 className='red'> BOOK ON SALE!@#</h1>}
-
-            <Reviews book={props.book} onAddReview={props.onAddReview} onDeleteBtn={props.onDeleteBtn}></Reviews>
-
-            <button onClick={this.props.goBack}>BACK</button>
-        </div>
+        return <React.Fragment>
+            <div className="book-details-container grid">
+                <div className="book-image">
+                    <img src={props.book.thumbnail} />
+                </div>
+                <div className="book-info-container">
+                    <div className="capitalize">Title: {this.props.book.title}</div>
+                    <div>Subtitle: {this.props.book.subtitle}</div>
+                    <div>Authors: <AuthorsList book={this.props.book} /></div>
+                    <div>Published Date: {this.state.publishedDate}</div>
+                    <div>Description: <LongTxt text={props.book.description} isLongTxtShown={this.state.isLongTxtShown} />
+                        <span className="long-text" onClick={this.onLngTxtToggle}>{this.state.isLongTxtShown ?
+                            'less' : 'more'}</span></div>
+                    <div>Number of pages: {props.book.pageCount} - {this.state.pageCount}</div>
+                    <div>Categories: <CategoryList book={this.props.book} /></div>
+                    <div>Language: {this.formatLanguage()}</div>
+                    <div><span className={setPriceClass(this.props.book.listPrice.amount)}>{this.props.book.listPrice.amount}</span>
+                        <span>{formatCurrency(this.props.book.listPrice.currencyCode)}</span></div>
+                    <div><img src={isOnSale(this.props.book.listPrice.isOnSale)} /></div>
+                </div>
+                <Reviews book={props.book} onAddReview={props.onAddReview} onDeleteBtn={props.onDeleteBtn}></Reviews>
+                <div className="book-nav-buttons-container flex center">
+                    <div className="book-nav-button pointer" onClick={() => this.props.changeBook(-1)}>Previous</div>
+                    <div className="book-nav-button pointer" onClick={this.props.goBack}>Back</div>
+                    <div className="book-nav-button pointer" onClick={() => this.props.changeBook(1)}>Next</div>
+                </div>
+            </div>
+        </React.Fragment>
     }
 }

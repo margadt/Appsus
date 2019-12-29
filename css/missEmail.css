@@ -5,8 +5,9 @@
     padding-top: 10px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
     min-width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
     background-color: lightsteelblue;
     grid-template-columns: 200px auto;
     grid-template-rows: 70px auto;
@@ -174,6 +175,9 @@ input#search-mail {
 
 .email-list {
     border: 10px;
+}
+.row:nth-child(odd) {
+    border-radius: 5px;
 }
 
 .row:nth-child(even) {
