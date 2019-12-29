@@ -25,7 +25,7 @@ export default class TodosPreview extends React.Component {
 
     onToggleSave = (ev) => {
         ev.stopPropagation();
-        this.setState(prev => ({ saveHidden: false }))
+        this.setState(({ saveHidden: false }))
     }
 
     onDeleteNote = () => {
@@ -43,7 +43,6 @@ export default class TodosPreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div style={{ backgroundColor: note.style.backgroundColor }} className={'note' + (note.isPinned ? ' pinned' : '')} >
-            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
             < h1 name='label' contentEditable='true' onInput={this.emitChangeLabel} onClick={this.onToggleSave} suppressContentEditableWarning={true} > {note.info.label}</h1 >
             <hr />
@@ -54,17 +53,18 @@ export default class TodosPreview extends React.Component {
                 } else {
                     date = new Date(todo.doneAt).toLocaleString(navigator.language, { hour: '2-digit', minute: '2-digit' })
                 }
-                return <div className="todos-container" key={i}><p title={'todo' + i} onClick={this.onToggleSave}
-                    contentEditable='true' onInput={this.emitChangeTodos} suppressContentEditableWarning={true}
-                >{todo.txt}</p>
+                return <div className="todos-container" key={i}>
+                    <p title={'todo' + i} onClick={this.onToggleSave}
+                        contentEditable='true' onInput={this.emitChangeTodos} suppressContentEditableWarning={true}
+                    >{todo.txt}</p>
                     <p className='todos-date'> at {date}</p>
                     <DeleteTodo note={note} todoIdx={i} onDeleteTodo={this.props.onDeleteTodo} />
                 </div>
-            })
-            }
-            {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
+            })}
+            {!this.state.saveHidden && <i className="fas fa-save pointer" onClick={this.onSaveBtn}></i>}
             <i className="fas fa-thumbtack pointer" onClick={this.onNotePinToggler}></i>
             <i className="fas fa-palette pointer" onClick={this.onToggleColorPicker}></i>
+            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.onDeleteNote}></i>
             {!this.state.colorHidden && <div className="color-container">
                 <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='red' />
                 <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='blue' />

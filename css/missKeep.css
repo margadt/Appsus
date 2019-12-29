@@ -3,11 +3,7 @@
 /* header */
 
 .note-header {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 100%;
+    height: 70px;
     background-color: lightsteelblue;
 }
 
@@ -70,7 +66,12 @@
 
 .input-menu {
     background-color: lightsteelblue;
-    height: 40px;
+    padding-bottom: 20px;
+    border-bottom: 5px solid lightgray;
+}
+
+.input-menu i {
+    font-size: 1.5rem;
 }
 
 .text-input {
@@ -82,6 +83,10 @@
     border-color: transparent;
     font-family: inherit;
     outline: none;
+}
+
+.selected-radio {
+    color: lightgray;
 }
 
 .add-note {
@@ -97,10 +102,8 @@
 }
 
 .radio {
-    background-color: lightgrey;
-    color: black;
-    padding: none;
-    border: none;
+    margin: 0 1rem;
+    cursor: pointer;
 }
 
 .note-list-container {

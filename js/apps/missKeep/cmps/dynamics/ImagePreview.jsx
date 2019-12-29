@@ -35,13 +35,13 @@ export default class ImagePreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div style={{ backgroundColor: note.style.backgroundColor }} className={'note' + (note.isPinned ? ' pinned' : '')}>
-            <i className="far fa-times-circle pointer close-button flex-end" onMouseUp={this.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
             <h2 contentEditable='true' onInput={this.emitChange} onClick={this.onToggleSave} suppressContentEditableWarning={true}>{note.info.title}</h2>
             <img src={note.info.url} alt='note-img' />
-            {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
+            {!this.state.saveHidden && <i className="fas fa-save pointer" onClick={this.onSaveBtn}></i>}
             <i className="fas fa-thumbtack pointer" onClick={this.onNotePinToggler}></i>
             <i className="fas fa-palette pointer" onClick={this.onToggleColorPicker}></i>
+            <i className="far fa-times-circle pointer close-button flex-end" onMouseUp={this.onDeleteNote}></i>
             {!this.state.colorHidden && <div className="color-container">
                 <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='red' />
                 <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='blue' />
