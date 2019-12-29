@@ -17,10 +17,6 @@
     text-decoration: none;
 }
 
-.active {
-    background-color: rgb(227, 255, 174);
-}
-
 .delete-x {
     top: -100px;
     left: 160px;

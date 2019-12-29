@@ -1,5 +1,6 @@
 import eMailService from '../services/eMailService.js'
-import EmailDetails from '../cmps/EmailDetails.jsx'
+import InboxEmailDetails from '../cmps/InboxEmailDetails.jsx'
+import OutboxEmailDetails from '../cmps/OutboxEmailDetails.jsx'
 
 export default class EmailDetailsPage extends React.Component {
     state = {
@@ -35,7 +36,12 @@ export default class EmailDetailsPage extends React.Component {
     }
     
     render() {
-        if (!this.state.selectedEmail) return <div>Loading...</div>
-        return <EmailDetails eMail={this.state.selectedEmail} goBack={this.goBack} changeEmailShown={this.changeEmailShown}/>
+        if (!this.state.selectedEmail) {
+            return <div>Loading...</div>
+        } else if (this.props.filter === 'isSent'){
+            return <OutboxEmailDetails eMail={this.state.selectedEmail} goBack={this.goBack} changeEmailShown={this.changeEmailShown}/>
+        } else {
+            return <InboxEmailDetails eMail={this.state.selectedEmail} goBack={this.goBack} changeEmailShown={this.changeEmailShown}/>
+        }
     }
 }

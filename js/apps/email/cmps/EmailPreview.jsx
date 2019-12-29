@@ -48,7 +48,7 @@ export default class EmailPreview extends React.Component {
 
     render() {
         return <React.Fragment>
-            {(this.props.filterBy === 'sent') ? 
+            {(this.props.filter === 'isSent') ? 
                 <Outbox isUnread={this.isUnread} onToggleMarkAsRead={this.onToggleMarkAsRead} onDelete={this.onDelete} onImportant={this.onImportant}
                        isItReadOrUnread={this.isItReadOrUnread} isItImportant={this.isItImportant} formatSubject={this.formatSubject} eMail={this.props.eMail}/> : 
                 <Inbox isUnread={this.isUnread} onToggleMarkAsRead={this.onToggleMarkAsRead} onDelete={this.onDelete} onImportant={this.onImportant}

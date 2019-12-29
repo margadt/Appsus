@@ -5,7 +5,7 @@ export default class eMailList extends React.Component {
     render () {
     return <React.Fragment>
         <div className="email-list">
-            {this.props.eMails.map((eMail, i) => <EmailPreview {...this.props} filter={this.props.filterBy} key={i} eMail={eMail} 
+            {this.props.eMails.map((eMail, i) => <EmailPreview {...this.props} filter={this.props.filter} key={i} eMail={eMail} 
             onToggleMarkAsRead={this.props.onToggleMarkAsRead}
             onDelete={this.props.onDelete} onImportant={this.props.onImportant}/>)}
         </div>
