@@ -17,8 +17,8 @@ export default class EmailApp extends React.Component {
         eMails: [],
         filterBy: '',
         searchText: '',
-        currSortBy: 'sentAt',
-        prevSortBy: ''
+        sortBy: 'sentAt',
+        isDescending: true
     }
 
     componentDidMount() {
@@ -33,7 +33,11 @@ export default class EmailApp extends React.Component {
     }
 
     loadEmails = () => {
-        eMailService.getEmails(this.state.filterBy, this.state.searchText, this.state.currSortBy, this.state.prevSortBy).then(eMails => {
+        eMailService.getEmails(this.state.filterBy, 
+            this.state.searchText, 
+            this.state.sortBy,
+            this.state.isDescending)
+        .then(eMails => {
             return this.setState({ eMails });
         })
     }
@@ -66,7 +70,8 @@ export default class EmailApp extends React.Component {
     }
 
     onSortBy = (sortBy) => {
-        this.setState(({ prevSortBy: this.state.currSortBy, currSortBy: sortBy}), this.loadEmails);
+        this.setState(prevState => ({ sortBy: sortBy, isDescending: !prevState.isDescending}), this.loadEmails);
+
     }
 
     render() {
@@ -85,7 +90,7 @@ export default class EmailApp extends React.Component {
                             <EmailList {...this.props} eMails={this.state.eMails} filter={this.state.filterBy} onToggleMarkAsRead={this.onToggleMarkAsRead}
                                 onDelete={this.onDelete} onImportant={this.onImportant} />
                         </Route>
-                        <Route path={`/email/:id`} render={(props) => <EmailDetailsPage {...props} />}>
+                        <Route path={`/email/:id`} render={(props) => <EmailDetailsPage {...props} filter={this.state.filterBy}/>}>
                         </Route>
                     </Switch>
                 </Router>

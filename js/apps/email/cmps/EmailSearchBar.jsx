@@ -1,5 +1,5 @@
 export default class EmailSearchBar extends React.Component {
-    
+
     state = {
         searchText: '',
         filter: ''
@@ -9,9 +9,9 @@ export default class EmailSearchBar extends React.Component {
         this.props.history.push('/email/');
         let field = event.target.name;
         let value = event.target.value;
-        (field === 'search-mail') ? 
-            this.setState(({searchText: value}), () => this.props.onSearchText(this.state.searchText, this.state.filter)) : 
-            this.setState(({filter: value}), () => this.props.onSearchText(this.state.searchText, this.state.filter));
+        (field === 'search-mail') ?
+            this.setState(({ searchText: value }), () => this.props.onSearchText(this.state.searchText, this.state.filter)) :
+            this.setState(({ filter: value }), () => this.props.onSearchText(this.state.searchText, this.state.filter));
     }
 
     sortBy = (event) => {
@@ -23,8 +23,8 @@ export default class EmailSearchBar extends React.Component {
     render() {
         return <React.Fragment>
             <div className='email-search-bar flex center align-center'>
-                <input type='text' id='search-mail' name='search-mail' placeholder='Search Mail' 
-                       value={this.props.searchText} onChange={this.searchText}/>
+                <input type='text' id='search-mail' name='search-mail' placeholder='Search Mail'
+                    value={this.props.searchText} onChange={this.searchText} />
                 <select name='filter' className='search-bar-filter' onChange={this.searchText}>
                     <option default value=''>All</option>
                     <option value='isRead'>Unread Messages</option>
@@ -33,10 +33,11 @@ export default class EmailSearchBar extends React.Component {
                 </select>
                 <div>
                     <span>Sort by:</span>
-                        <button className='subject-sort-button pointer' value='subject' onClick={this.sortBy}>Subject</button>
-                        <button className='sentat-sort-button pointer' value='sentAt' onClick={this.sortBy}>Date</button>
+                    <button className='from-sort sort-button pointer' value='from' onClick={this.sortBy}>From</button>
+                    <button className='subject-sort sort-button pointer' value='subject' onClick={this.sortBy}>Subject</button>
+                    <button className='sort-button pointer' value='sentAt' onClick={this.sortBy}>Date</button>
                 </div>
             </div>
         </React.Fragment>
-            }
+    }
 }

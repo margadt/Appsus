@@ -10,26 +10,26 @@ export default {
 const eMailKey = 'eMails';
 let gEmails = storageService.load(eMailKey) || createEmails();
 
-function getEmails(filterBy, searchText, currSortBy, prevSortBy) {
+function getEmails(filterBy, searchText, sortBy, isDescending) {
     let mails = searchEmail(searchText);
-    switch (true) {
-        case (filterBy === ''): {
+    switch (filterBy) {
+        case '': {
             mails = mails.filter(mail => (!mail.isSent))
             break;
         }
-        case (filterBy === 'isRead'): {
+        case 'isRead': {
             mails = mails.filter(mail => (!mail.isRead));
             break;
         }
-        case (filterBy === 'isImportant'): {
+        case 'isImportant': {
             mails = mails.filter(mail => (mail.isImportant));
             break;
         }
-        case (filterBy === 'isSent'): {
+        case 'isSent': {
             mails = mails.filter(mail => (mail.isSent));
         }
     }
-    mails = sortEmails(mails, currSortBy, prevSortBy);
+    mails = sortEmails(mails, sortBy, isDescending);
     return Promise.resolve(mails);
 }
 
@@ -42,36 +42,21 @@ function searchEmail(searchText) {
     }
 }
 
-function sortEmails(mails, currSortBy, prevSortBy) {
-    console.log('mails: ', mails);
-    if (currSortBy === 'subject') {
-        mails = mails.sort((eMail1, eMail2) => {
-            let result = (eMail1[currSortBy].toLowerCase() > eMail2[currSortBy].toLowerCase()) ? -1 : (eMail1[currSortBy].toLowerCase() < eMail2[currSortBy].toLowerCase()) ? 1 : 0;
-            return result;
+function sortEmails(mails, sortBy, isDescending) {
+    if (sortBy === 'subject') {
+        mails.sort((m1, m2) => {
+            let stringM1 = m1[sortBy].toLowerCase();
+            let stringM2 = m2[sortBy].toLowerCase();
+            let result = ( stringM1 > stringM2) ? -1 : (stringM1 < stringM2) ? 1 : 0;
+            return result  * (isDescending ? -1: 1);
         });
     } else {
-        mails = mails.sort((eMail1, eMail2) => {
-            let result = (eMail1[currSortBy] > eMail2[currSortBy]) ? -1 : (eMail1[currSortBy] < eMail2[currSortBy]) ? 1 : 0;
-            return result;
+        mails.sort((m1, m2) => {
+            let result = (m1[sortBy] > m2[sortBy]) ? -1 : (m1[sortBy] < m2[sortBy]) ? 1 : 0;
+            return result  * (isDescending ? -1: 1);
         });
     }
-    console.log('mails: ', mails);
-    console.log('curr: ', currSortBy);
-    console.log('prev: ', prevSortBy);
-
-    // console.log('currSortBy: ', currSortBy);
-    // console.log('prevSortBy: ', prevSortBy);
-    // console.log(mails);
-    // if (currSortBy === prevSortBy) {
-    //     console.log('reverse');
-    //     mails = [...mails.reverse()];
-    //     console.log(reversedMails)
-    //     return mails;
-    // } else {
-    //     console.log('notReverse');
-    //     return mails;
-    // }
-    return (currSortBy === prevSortBy) ? mails = [...mails.reverse()] : mails;
+    return mails;
 }
 
 function getEmailById(id) {
@@ -143,7 +128,8 @@ function getImportantEmailsCount() {
 
 function getEmailPercentageRead() {
     let unreadMails = getUnreadEmailsCount();
-    let eMailPercentageRead = Math.round((unreadMails / gEmails.length) * 100);
+    let inBox = gEmails.filter(gEmail => (!gEmail.isSent))
+    let eMailPercentageRead = Math.round((unreadMails / inBox.length) * 100);
     return eMailPercentageRead;
 }
 

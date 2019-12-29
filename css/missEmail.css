@@ -1,11 +1,12 @@
 /* missMail */
 
 .main-container {
-    margin-top: 10px;
+    position: relative;
+    padding-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100vh;
     background-color: lightsteelblue;
     grid-template-columns: 200px auto;
     grid-template-rows: 70px auto;
@@ -31,7 +32,7 @@
     border-radius: 20px;
 }
 
-.inbox-nav-bar:hover, .unread-nav-bar:hover, .important-nav-bar:hover, .sent-nav-bar:hover {
+.inbox-nav-bar:hover, .unread-nav-bar:hover, .important-nav-bar:hover, .sent-nav-bar:hover, .nav-button:hover {
     background-color: black;
     color: lightgrey;
     border-radius: 20px;
@@ -57,7 +58,7 @@
 .email-search-bar {
     grid-area: email-search-bar;
     height: 70px;
-    border-bottom: 2px solid lightgrey;
+    border-bottom: 5px solid lightgrey;
 }
 
 input#search-mail {
@@ -85,34 +86,27 @@ input#search-mail {
     outline: none;
 }
 
-.subject-sort-button {
+.sort-button {
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+.from-sort {
     margin-left: 20px;
+    margin-right: 20px;   
+}
+
+.subject-sort {
     margin-right: 20px;
-    text-align: center;
-    height: 30px;
-    width: 70px;
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 20px;
-    font-family: inherit;
 }
 
-.subject-sort-button:hover {
-    background-color: black;
-    color: lightgrey;
-}
-
-.sentat-sort-button {
-    text-align: center;
-    height: 30px;
-    width: 70px;
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 20px;
-    font-family: inherit;
-}
-
-.sentat-sort-button:hover {
+.sort-button:hover {
     background-color: black;
     color: lightgrey;
 }
@@ -193,7 +187,7 @@ input#search-mail {
     line-height: 30px;
 }
 
-.from-preview {
+.from-preview, .to-preview {
     width: 150px;
     padding-left: 10px;
 }
@@ -289,7 +283,71 @@ input#search-mail {
     font-family: inherit;
 }
 
+/* email reply */
+
+.reply-container {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 10px -10px lightgrey;
+}
+
+.to-reply, .subject-reply {
+    font-family: inherit;
+    width: inherit;
+    padding-left: 10px;
+    height: 40px;
+    outline: none;
+    border: none;
+}
+
+.to-reply {
+    width: 700px;
+}
+
+.to-reply-container {
+    padding-left: 15px;
+    border-bottom: 2px solid lightgrey;
+}
+
+.subject-container {
+    border-bottom: 2px solid lightgrey;    
+}
+
+.subject-reply {
+    padding-left: 15px;
+    width: 100%;
+}
+
+.reply-body {
+    outline: none;
+    resize: none;
+    overflow: auto;
+    font-family: inherit;
+    padding-left: 10px;
+    padding-right: 10px;
+    border:none;
+    width: 100%;
+}
+
+.close-button-reply {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.footer-reply {
+    height: 70px;
+    background-color: slategrey;
+    color: lightgrey;
+    line-height: 30px;
+    padding-right: 10px;
+    border-radius: 0px 0px 20px 20px;
+}
+
 /* email details */
+
+.email-details-container {
+    min-height: 100vh;
+}
 
 .nav-buttons-container {
     grid-area: back-btn;

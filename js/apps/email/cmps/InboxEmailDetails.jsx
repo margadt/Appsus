@@ -1,7 +1,7 @@
 import { formatDateEmailDetails } from '../services/eMailUtils.js'
-import EmailReply from '../cmps/EmailReply.jsx'
+import InboxEmailReply from '../cmps/InboxEmailReply.jsx'
 
-export default class EmailDetails extends React.Component {
+export default class InboxEmailDetails extends React.Component {
     
     state = {reply: false}
 
@@ -24,7 +24,7 @@ export default class EmailDetails extends React.Component {
                         <div>Subject: {this.props.eMail.subject}</div>
                         <div>Received: {formatDateEmailDetails(this.props.eMail.sentAt)}</div>
                         <p className='email-body-details flex wrap'>{this.props.eMail.body}</p>
-                        {(this.state.reply) ? <EmailReply {...this.props} eMail={this.props.eMail}/> : ''}
+                        {(this.state.reply) ? <InboxEmailReply onReply={this.onReply} {...this.props} eMail={this.props.eMail}/> : ''}
                     </div>
                 </div>
             </div>
