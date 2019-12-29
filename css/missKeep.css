@@ -3,11 +3,7 @@
 /* header */
 
 .note-header {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 100%;
+    height: 70px;
     background-color: lightsteelblue;
 }
 
@@ -70,7 +66,12 @@
 
 .input-menu {
     background-color: lightsteelblue;
-    height: 40px;
+    padding-bottom: 20px;
+    border-bottom: 5px solid lightgray;
+}
+
+.input-menu i {
+    font-size: 1.5rem;
 }
 
 .text-input {
@@ -82,6 +83,10 @@
     border-color: transparent;
     font-family: inherit;
     outline: none;
+}
+
+.selected-radio {
+    color: lightgray;
 }
 
 .add-note {
@@ -97,10 +102,8 @@
 }
 
 .radio {
-    background-color: lightgrey;
-    color: black;
-    padding: none;
-    border: none;
+    margin: 0 1rem;
+    cursor: pointer;
 }
 
 .note-list-container {
@@ -120,12 +123,39 @@
     border-radius: 20px;
 }
 
+.note h1 {
+    margin: 0;
+    padding-top: 1rem;
+    font-size: 1.3rem;
+}
+
+.note p {
+    margin: 0;
+    padding-top: 1rem;
+    padding-right: 5px;
+}
+
+.note i {
+    margin: 0 3px;
+}
+
+.note i:hover {
+    color: darkgray;
+}
+
 .note img {
     width: 200px;
 }
 
+.pin {
+    position: absolute;
+    left: 8px;
+    color: darkgray;
+}
+
 .pinned {
     order: -1;
+    position: relative;
 }
 
 .pinned-img {
@@ -142,18 +172,47 @@
     color: rgba(0, 0, 0, 0.644)
 }
 
-.red {
-    color: red;
+.aliceblue {
+    color: aliceblue;
 }
 
-.blue {
-    color: blue;
+.aquamarine {
+    color: aquamarine;
 }
 
-.purple {
-    color: purple;
+.coral {
+    color: coral;
 }
 
 .yellow {
-    color: yellow;
+    color: rgb(255, 255, 128);
+}
+
+.fa-tint {
+    text-shadow: 0 0 3px #000;
+}
+
+@media screen and (max-width: 576px) {
+    .input-menu {
+        flex-direction: column;
+        padding-bottom: 1rem;
+    }
+    .text-input {
+        margin-bottom: 1rem;
+        width: 80vw;
+    }
+
+    .note{
+        width: 90vw;
+        margin-bottom: 1rem;
+    }
+
+    .note img{
+        width: 80vw;
+    }
+
+    .control-container{
+        display: flex;
+        justify-content: space-around;
+    }
 }

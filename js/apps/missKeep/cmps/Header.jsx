@@ -22,20 +22,15 @@ export default class Header extends React.Component {
     }
 
     render() {
-        return <div className='note-header flex space-between border'>
-            <img className='logo' src='../../../img/temp-logo.png' />
+        return <div className='note-header flex center align-center'>
             <div className="filter-bar flex align-center">
                 <input className='notes-search' name='title' onChange={this.changeInput} value={this.state.filterBy.title} type='text' placeholder={this.props.placeHolder} />
-                <button className='go pointer' onClick={this.onFilterClick}>Go!</button>
             </div>
             <div className='flex align-center'>
                 <select className='notes-search-filter pointer' name='search-filter' onChange={this.onSetSelectFilter}>
                     <option value='all'>All</option>
                     <option value='isPinned'>Pinned</option>
                 </select>
-            </div>
-            <div className='flex align-center'>
-                <button className='menuBtn pointer'>menuBtn</button>
             </div>
         </div>
     }

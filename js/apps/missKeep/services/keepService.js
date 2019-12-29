@@ -9,8 +9,6 @@ let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
 
 function getNotes(filterBy, selectFilter) {
-    console.log('args', filterBy, selectFilter);
-
     switch (selectFilter) {
         case 'isPinned':
             if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);

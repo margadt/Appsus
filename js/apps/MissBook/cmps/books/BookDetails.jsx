@@ -117,9 +117,7 @@ export default class BookDetails extends React.Component {
                 </div>
                 <Reviews book={props.book} onAddReview={props.onAddReview} onDeleteBtn={props.onDeleteBtn}></Reviews>
                 <div className="book-nav-buttons-container flex center">
-                    <div className="book-nav-button pointer" onClick={() => this.props.changeBook(-1)}>Previous</div>
                     <div className="book-nav-button pointer" onClick={this.props.goBack}>Back</div>
-                    <div className="book-nav-button pointer" onClick={() => this.props.changeBook(1)}>Next</div>
                 </div>
             </div>
         </React.Fragment>

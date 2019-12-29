@@ -41,17 +41,21 @@ export default class VideoPreview extends React.Component {
     render() {
         const { note } = this.props;
         return <div style={{ backgroundColor: note.style.backgroundColor }} className={'note' + (note.isPinned ? ' pinned' : '')}>
-            <i className="far fa-times-circle pointer close-button flex-end" onMouseUp={this.onDeleteNote}></i>
-            {note.isPinned && <h1>📌</h1>}
-            <h2 contentEditable='true' onInput={this.emitChange} onClick={this.onToggleSave} suppressContentEditableWarning={true}>{note.info.title}</h2>
+            {note.isPinned ? <i className="fas fa-map-pin pin"></i> : ''}
+            <h1 contentEditable='true' onInput={this.emitChange} onClick={this.onToggleSave} suppressContentEditableWarning={true}>{note.info.title}</h1>
+            <hr />
             <iframe type='text/html' width="250" height="140.625" src={note.info.url}></iframe>
-            {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
-            <i className="fas fa-thumbtack pointer" onClick={this.onNotePinToggler}></i>
-            <i className="fas fa-palette pointer" onClick={this.onToggleColorPicker}></i>
+            <hr />
+            <div className="control-container">
+                {!this.state.saveHidden && <i className="fas fa-save pointer" onClick={this.onSaveBtn}></i>}
+                <i className="fas fa-thumbtack pointer" onClick={this.onNotePinToggler}></i>
+                <i className="fas fa-palette pointer" onClick={this.onToggleColorPicker}></i>
+                <i className="fas fa-trash pointer" onMouseUp={this.onDeleteNote}></i>
+            </div>
             {!this.state.colorHidden && <div className="color-container">
-                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='red' />
-                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='blue' />
-                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='purple' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='aliceblue' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='aquamarine' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='coral' />
                 <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='yellow' />
             </div>}
         </div>
