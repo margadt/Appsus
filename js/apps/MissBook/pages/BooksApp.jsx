@@ -31,7 +31,7 @@ export default class BooksApp extends React.Component {
         return (
             <div className="books-main-container flex column">
                 <Filter onFilter={this.onFilter}></Filter>
-                <button onClick={this.onGoToAdd}>Add Book</button>
+                <i className="fas fa-book-medical pointer" onClick={this.onGoToAdd}></i>
                 <BooksList books={this.state.books}></BooksList>
             </div>
         )

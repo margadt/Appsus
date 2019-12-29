@@ -33,11 +33,13 @@ export default class AddNoteInput extends React.Component {
     render() {
         return <div className='flex center align-center input-menu'>
             <input id='text-input' className='text-input' name='input' type="text" placeholder={this.state.placeHolder} onChange={this.emitChange} value={this.state.input} />
-            <RadioFake type='NoteText' fontClass={'radio fas fa-file-alt '} currType={this.state.type} onSetType={this.onSetType} />
-            <RadioFake type='NoteImg' fontClass={'radio fas fa-image'} currType={this.state.type} onSetType={this.onSetType} />
-            <RadioFake type='NoteTodos' fontClass={'radio fas fa-list'} currType={this.state.type} onSetType={this.onSetType} />
-            <RadioFake type='NoteVideo' fontClass={'radio fab fa-youtube'} currType={this.state.type} onSetType={this.onSetType} />
-            <button className='add-note pointer' onClick={this.onAddNote}>Add</button>
+            <div className="type-container flex space-between align-center">
+                <RadioFake type='NoteText' fontClass={'radio fas fa-file-alt '} currType={this.state.type} onSetType={this.onSetType} />
+                <RadioFake type='NoteImg' fontClass={'radio fas fa-image'} currType={this.state.type} onSetType={this.onSetType} />
+                <RadioFake type='NoteTodos' fontClass={'radio fas fa-list'} currType={this.state.type} onSetType={this.onSetType} />
+                <RadioFake type='NoteVideo' fontClass={'radio fab fa-youtube'} currType={this.state.type} onSetType={this.onSetType} />
+                <button className='add-note pointer' onClick={this.onAddNote}>Add</button>
+            </div>
         </div>
     }
 }

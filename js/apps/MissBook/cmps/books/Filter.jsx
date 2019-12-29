@@ -17,7 +17,7 @@ export default class Filter extends React.Component {
     }
 
     render() {
-        return <div className="book-search-bar flex center">
+        return <div className="book-search-bar flex">
             <div className="input-container">
                 <input className='book-search' type="text" placeholder="Book title" value={this.state.filterBy.title}
                     onChange={this.changeInput} name="title"></input>
