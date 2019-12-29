@@ -14,6 +14,7 @@ function getEmails(filterBy, searchText, currSortBy, prevSortBy) {
     let mails = searchEmail(searchText);
     switch (true) {
         case (filterBy === ''): {
+            mails = mails.filter(mail => (!mail.isSent))
             break;
         }
         case (filterBy === 'isRead'): {
@@ -124,7 +125,8 @@ function eMailSend(eMail) {
 }
 
 function getUnreadEmailsCount() {
-    let counter = gEmails.reduce((acc, email) => {
+    let unreadMails = gEmails.filter(gEmail => (!gEmail.isSent))
+    let counter = unreadMails.reduce((acc, email) => {
         if (email.isRead === false) acc++;
         return acc;
     }, 0);

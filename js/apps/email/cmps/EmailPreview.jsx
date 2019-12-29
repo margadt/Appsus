@@ -1,4 +1,5 @@
-import { formatDate } from '../services/eMailUtils.js'
+import Inbox from '../cmps/Inbox.jsx'
+import Outbox from '../cmps/Outbox.jsx'
 
 const { Link } = ReactRouterDOM;
 
@@ -47,18 +48,11 @@ export default class EmailPreview extends React.Component {
 
     render() {
         return <React.Fragment>
-            <div className={` email-preview-container row dynamic-comp flex column ${this.isUnread()}`}>
-                <Link className="flex space-between" to={`/email/${this.props.eMail.id}`}>
-                    <div className="icon-container"><i onClick={this.onImportant} id={this.props.eMail.id} className={this.isItImportant()}></i></div>
-                    <span className="from-preview">{this.props.eMail.from} </span>
-                    <span className="subject-preview">{this.formatSubject()} </span>
-                    <div className="icons-container-preview flex flex-end">
-                        <div className="icon-container"><i onClick={this.onToggleMarkAsRead} id={this.props.eMail.id} className={this.isItReadOrUnread()}></i></div>
-                        <div className="icon-container"><i className="far fa-trash-alt" onClick={this.onDelete} id={this.props.eMail.id}></i></div>
-                    </div>
-                    <span className="received">{formatDate(this.props.eMail.sentAt)}</span>
-                </Link>
-            </div>
+            {(this.props.filterBy === 'sent') ? 
+                <Outbox isUnread={this.isUnread} onToggleMarkAsRead={this.onToggleMarkAsRead} onDelete={this.onDelete} onImportant={this.onImportant}
+                       isItReadOrUnread={this.isItReadOrUnread} isItImportant={this.isItImportant} formatSubject={this.formatSubject} eMail={this.props.eMail}/> : 
+                <Inbox isUnread={this.isUnread} onToggleMarkAsRead={this.onToggleMarkAsRead} onDelete={this.onDelete} onImportant={this.onImportant}
+                       isItReadOrUnread={this.isItReadOrUnread} isItImportant={this.isItImportant} formatSubject={this.formatSubject} eMail={this.props.eMail}/>}
         </React.Fragment>
     }
 }
