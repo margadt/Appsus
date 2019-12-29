@@ -519,14 +519,13 @@ input#search-mail {
     }
     .icon-container {
         flex-direction: row;
-        width: 30px;
-        height: 10px;
+        width: 60px;
+        height: 30px;
         text-align: center;
         order: 3;
     }
     .icon-container:first-child {
-        margin-right: 0;
-        margin-left: 10px;
+        margin-right: 20px;
     }
     /* email details */
     .email-details-container {
