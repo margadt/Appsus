@@ -1,11 +1,12 @@
-import { getRandomId } from '../../../../services/utils.js'
-
+import DeleteTodo from '../DeleteTodo.jsx'
+import ColorPicker from '../ColorPicker.jsx'
 
 export default class TodosPreview extends React.Component {
     state = {
         saveHidden: true,
         todos: { ...this.props.note.info.todos },
-        label: this.props.note.info.label
+        label: this.props.note.info.label,
+        colorHidden: true
     }
 
     onSaveBtn = () => {
@@ -24,18 +25,24 @@ export default class TodosPreview extends React.Component {
 
     onToggleSave = (ev) => {
         ev.stopPropagation();
-        this.setState({ saveHidden: false })
+        this.setState(prev => ({ saveHidden: false }))
     }
 
     onDeleteNote = () => {
         this.props.onDeleteNote(this.props.note);
     }
 
+    onNotePinToggler = () => {
+        this.props.onNotePinToggler(this.props.note);
+    }
 
+    onToggleColorPicker = () => {
+        this.setState(prev => ({ colorHidden: !prev.colorHidden }));
+    }
 
     render() {
         const { note } = this.props;
-        return <div className={'note' + (note.isPinned ? ' pinned' : '')} >
+        return <div style={{ backgroundColor: note.style.backgroundColor }} className={'note' + (note.isPinned ? ' pinned' : '')} >
             <i className="far fa-times-circle pointer close-button flex-end" onClick={this.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
             < h1 name='label' contentEditable='true' onInput={this.emitChangeLabel} onClick={this.onToggleSave} suppressContentEditableWarning={true} > {note.info.label}</h1 >
@@ -49,10 +56,21 @@ export default class TodosPreview extends React.Component {
                 }
                 return <div className="todos-container" key={i}><p title={'todo' + i} onClick={this.onToggleSave}
                     contentEditable='true' onInput={this.emitChangeTodos} suppressContentEditableWarning={true}
-                >{todo.txt}</p> <p className='todos-date'>at {date}</p></div>
+                >{todo.txt}</p>
+                    <p className='todos-date'> at {date}</p>
+                    <DeleteTodo note={note} todoIdx={i} onDeleteTodo={this.props.onDeleteTodo} />
+                </div>
             })
             }
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
+            <i className="fas fa-thumbtack pointer" onClick={this.onNotePinToggler}></i>
+            <i className="fas fa-palette pointer" onClick={this.onToggleColorPicker}></i>
+            {!this.state.colorHidden && <div className="color-container">
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='red' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='blue' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='purple' />
+                <ColorPicker note={note} onChangeBgcColor={this.props.onChangeBgcColor} color='yellow' />
+            </div>}
         </div>
     }
 }

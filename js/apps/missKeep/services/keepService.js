@@ -3,7 +3,7 @@ import { getRandomId } from '../../../services/utils.js'
 import getDefaultNotes from '../data/defaultNotes.js'
 import storageService from '../../../services/storageService.js'
 
-export default { getNotes, addNote, deleteNote, updateNote }
+export default { getNotes, addNote, deleteNote, updateNote, deleteTodo, notePinToggler, changeNoteBgc }
 
 let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
@@ -51,7 +51,10 @@ function addText(val) {
         type: "NoteText",
         isPinned: true,
         info: {
-            txt: val
+            title: val
+        },
+        style: {
+            backgroundColor: "#00d"
         }
     }
 }
@@ -81,6 +84,9 @@ function addTodos(val) {
         info: {
             label: "Todo:",
             todos: todos.map(todo => ({ txt: todo, doneAt: Date.now() }))
+        },
+        style: {
+            backgroundColor: "#00d"
         }
     }
 }
@@ -94,6 +100,9 @@ function addVideo(val) {
         info: {
             title: 'New Video',
             url: url
+        },
+        style: {
+            backgroundColor: "#00d"
         }
     }
 }
@@ -104,24 +113,27 @@ function deleteNote(delNote) {
     return Promise.resolve();
 }
 
+function deleteTodo(selectedNote, delTodoIdx) {
+    gNotes = gNotes.then(notes => notes.filter(note => {
+        if (note.id === selectedNote.id) {
+            note.info.todos = note.info.todos.filter((todo, i) => i !== delTodoIdx);
+            return note;
+        }
+        return note;
+    }));
+    gNotes.then(notes => storageService.store('notes', notes));
+    return Promise.resolve();
+}
+
 function updateNote(updateNote, val) {
     switch (updateNote.type) {
         case 'NoteImg':
-            gNotes = gNotes.then(notes => {
-                return notes.map(note => {
-                    if (note.id === updateNote.id) {
-                        note.info.title = val;
-                        return note;
-                    }
-                    return note;
-                });
-            });
-            break;
+        case 'NoteVideo':
         case 'NoteText':
             gNotes = gNotes.then(notes => {
                 return notes.map(note => {
                     if (note.id === updateNote.id) {
-                        note.info.txt = val;
+                        note.info.title = val;
                         return note;
                     }
                     return note;
@@ -146,17 +158,6 @@ function updateNote(updateNote, val) {
                 });
             });
             break;
-        case 'NoteVideo':
-            gNotes = gNotes.then(notes => {
-                return notes.map(note => {
-                    if (note.id === updateNote.id) {
-                        note.info.title = val;
-                        return note;
-                    }
-                    return note;
-                });
-            });
-            break;
         default:
             return 'Wrong format';
     }
@@ -167,4 +168,30 @@ function updateNote(updateNote, val) {
 
 function getTodosIdx(todo) {
     return +todo.substring(4);
+}
+
+function notePinToggler(pinNote) {
+    gNotes = gNotes.then(notes => {
+        return notes.map(note => {
+            if (note.id === pinNote.id) {
+                note.isPinned = !note.isPinned;
+                return note;
+            }
+            return note;
+        });
+    });
+    return Promise.resolve();
+}
+
+function changeNoteBgc(updateNote, color) {
+    gNotes = gNotes.then(notes => {
+        return notes.map(note => {
+            if (note.id === updateNote.id) {
+                note.style.backgroundColor = color;
+                return note;
+            }
+            return note;
+        });
+    });
+    return Promise.resolve();
 }
