@@ -31,8 +31,8 @@ class Main extends React.Component {
                         <Route component={EmailApp} path='/email'></Route>
                         <Route component={KeepApp} path='/keep' exact></Route>
                         <Route component={BooksApp} path='/book' exact></Route>
-                        <Route component={BookPage} path='/book/:bookId'></Route>
-                        <Route render={(props) => <BookAdd {...props} toggleModal={this.toggleModal} />} path='/addBook' exact></Route>
+                        <Route component={BookPage} path='/book/:bookId' exact></Route>
+                        <Route component={BookAdd} path='/addBook' exact></Route>
                     </Switch>
                     <Footer />
                 </Router>
