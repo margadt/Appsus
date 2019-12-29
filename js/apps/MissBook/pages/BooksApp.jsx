@@ -25,11 +25,10 @@ export default class BooksApp extends React.Component {
 
     render() {
         return (
-            <section>
-                <h1>Books</h1>
+            <div className="books-main-container flex column">
                 <Filter onFilter={this.onFilter}></Filter>
                 <BooksList books={this.state.books}></BooksList>
-            </section>
+            </div>
         )
     }
 }

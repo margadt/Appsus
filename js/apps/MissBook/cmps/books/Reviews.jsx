@@ -5,7 +5,7 @@ export default class Reviews extends React.Component {
     state = { currReviewId: null }
 
     render() {
-        return <div className='review'>
+        return <div className='reviews-container'>
             <ReviewForm onSave={this.props.onAddReview}></ReviewForm>
 
             {this.props.book.reviews ? this.props.book.reviews.map((review, i) => {
@@ -16,7 +16,7 @@ export default class Reviews extends React.Component {
                     <li className='textarea'>Review: {review.review}</li>
                     <DeleteReview reviewIdx={i} onDeleteBtn={this.props.onDeleteBtn} />
                 </ul>
-            }) : <p>No reviews</p>}
+            }) : <div className='reviews-display'>No reviews</div>}
         </div>
     }
 }

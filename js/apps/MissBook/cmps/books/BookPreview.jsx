@@ -1,40 +1,30 @@
+import { setPriceClass, isOnSaleThumbnails, formatCurrency } from '../../services/booksDetailsServices.js'
+
 const { Link } = ReactRouterDOM;
 
 export default class BookPreview extends React.Component {
-    state = { icon: '' }
-
-    componentDidMount() {
-        this.checkCurrencyCode();
-    }
-
 
     onSelectBook = () => {
         if (this.props.onSelectBook)
             this.props.onSelectBook(this.props.book);
     }
 
-    checkCurrencyCode = () => {
-        const { props } = this;
-        switch (props.book.listPrice.currencyCode) {
-            case 'ILS':
-                this.setState({ icon: '₪' });
-                break;
-            case 'USD':
-                this.setState({ icon: '$' });
-                break;
-            case 'EUR':
-                this.setState({ icon: '€' });
-                break;
-        }
-    }
-
     render() {
         const { props } = this;
         return <Link to={`/book/${props.book.id}`}>
-            <li className='book clean-list' onClick={this.onSelectBook}>
-                <h2>{props.book.title}</h2>
-                <h3><span className={props.class ? props.class : ''}>{props.book.listPrice.amount} </span>{this.state.icon}</h3>
-            </li>
+            <div className="book-container flex column center pointer" onClick={this.onSelectBook}>
+                <div className="thumbnail-container flex center align-center">
+                    <img src={props.book.thumbnail} height="130" width="100" />
+                </div>
+                <div className="info-container">
+                    <h2 className="book-title capitalize">{props.book.title}</h2>
+                    <div className="price flex center align-center">
+                        <span className={setPriceClass(props.book.listPrice.amount)}>{props.book.listPrice.amount} </span>
+                        <span>{formatCurrency(props.book.listPrice.currencyCode)}</span>
+                        <img src={isOnSaleThumbnails(props.book.listPrice.isOnSale)} />
+                    </div>
+                </div>
+            </div>
         </Link>
     }
 

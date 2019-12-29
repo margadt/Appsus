@@ -3,7 +3,7 @@ const { NavLink } = ReactRouterDOM
 export default function NavBar(props) {
     return <nav>
         <React.Fragment>
-            <div className="nav-bar-container flex center">
+            <div className="nav-bar-container flex center wrap">
                 <div className='nav-bar-icon-container'>
                     <NavLink activeClassName="active" to='/' exact >
                         <i className="fas fa-horse-head pointer"></i>

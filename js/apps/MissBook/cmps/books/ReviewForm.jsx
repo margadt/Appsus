@@ -16,19 +16,24 @@ export default class ReviewForm extends React.Component {
     }
 
     render() {
-        return <form className="review-container">
-            <input type="text" name='name' value={this.state.name} onChange={this.changeInput} placeholder='Full Name' />
-            <select name='rate' onChange={this.changeInput}>
+        return <form className="form-container flex column wrap">
+            <div className='flex center'>
+            <input className='name-review' type="text" name='name' value={this.state.name} onChange={this.changeInput} placeholder='Full Name' />
+            </div>
+            <div className='flex center'>
+            <select className='review-rate' name='rate' onChange={this.changeInput}>
                 <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
                 <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
                 <option value="⭐⭐⭐">⭐⭐⭐</option>
                 <option value="⭐⭐">⭐⭐</option>
                 <option value="⭐">⭐</option>
             </select>
-            <textarea name='review' rows="4" cols="50" placeholder='Add a review' onKeyUp={this.changeInput}>
+            </div>
+            <textarea className='review-text-area' name='review' rows="10" cols="30" placeholder='Add a review' onKeyUp={this.changeInput}>
             </textarea>
-            <button onClick={this.onSave}>Save</button>
-
+            <div className='flex center'>
+                <button className='save-review pointer' onClick={this.onSave}>Save</button>
+            </div>
         </form>
     }
 }
