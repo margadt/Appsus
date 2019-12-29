@@ -13,8 +13,7 @@ export default class TextPreview extends React.Component {
         this.setState({ txt: ev.target.innerHTML }, console.log);
     }
 
-    onEvStopProp = (ev) => {
-        ev.stopPropagation();
+    onToggleSave = () => {
         this.setState({ saveHidden: false })
     }
 
@@ -24,12 +23,16 @@ export default class TextPreview extends React.Component {
         }
     }
 
+    onDeleteNote = () => {
+        this.props.onDeleteNote(this.props.note);
+    }
+
     render() {
         const { note } = this.props;
-        return <div className={'note' + (note.isPinned ? ' pinned' : '')} onClick={this.onSelectNote}>
-            <i className="far fa-times-circle pointer close-button flex-end" onClick={this.props.onDeleteNote}></i>
+        return <div className={'note' + (note.isPinned ? ' pinned' : '')}>
+            <i className="far fa-times-circle pointer close-button flex-end" onMouseUp={this.onDeleteNote}></i>
             {note.isPinned ? <h1>📌</h1> : ''}
-            <p contentEditable='true' onInput={this.emitChange} onClick={this.onEvStopProp} suppressContentEditableWarning={true}> {note.info.txt}</p>
+            <p contentEditable='true' onInput={this.emitChange} onClick={this.onToggleSave} suppressContentEditableWarning={true}> {note.info.txt}</p>
             {!this.state.saveHidden && <button onClick={this.onSaveBtn}>Save</button>}
         </div >
     }

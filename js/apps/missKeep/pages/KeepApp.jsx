@@ -22,9 +22,6 @@ export default class KeepApp extends React.Component {
     //     this.setState({ selectedNote: null })
     // }
 
-    onSelectNote = (note) => {
-        this.setState({ selectedNote: note }, console.log('selected', note))
-    }
     onAddNote = (type, val) => {
         keepService.addNote(type, val)
             .then(() => {
@@ -32,8 +29,8 @@ export default class KeepApp extends React.Component {
             });
     }
 
-    onDeleteNote = () => {
-        keepService.deleteNote(this.state.selectedNote)
+    onDeleteNote = (note) => {
+        keepService.deleteNote(note)
             .then(() => {
                 // this.removeSelected()
                 this.loadNotes();
@@ -44,8 +41,8 @@ export default class KeepApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes);
     }
 
-    updateNote = (selectedNote, updatedVal) => {
-        keepService.updateNote(selectedNote, updatedVal)
+    updateNote = (updateNote, updatedVal) => {
+        keepService.updateNote(updateNote, updatedVal)
             .then(() => this.loadNotes());
     }
 
@@ -53,7 +50,7 @@ export default class KeepApp extends React.Component {
         return <header className='flex column'>
             <Header onFilter={this.onFilter} placeHolder="Search notes.."></Header>
             <AddNoteInput onAddNote={this.onAddNote}></AddNoteInput>
-            <NoteList onSelectNote={this.onSelectNote} onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]} updateNote={this.updateNote}></NoteList>
+            <NoteList onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]} updateNote={this.updateNote}></NoteList>
         </header>
     }
 }

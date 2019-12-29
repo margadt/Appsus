@@ -16,7 +16,7 @@ export default class DynamicComponent extends React.Component {
     render() {
         const Cmp = this.getComponent();
         return <React.Fragment>
-            <Cmp note={this.props.note} updateNote={this.props.updateNote} onDeleteNote={this.props.onDeleteNote} onSelectNote={this.props.onSelectNote}></Cmp>
+            <Cmp note={this.props.note} updateNote={this.props.updateNote} onDeleteNote={this.props.onDeleteNote} ></Cmp>
         </React.Fragment>
     }
 }
