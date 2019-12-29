@@ -1,0 +1,141 @@
+/* missKeep */
+
+/* header */
+
+.note-header {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    background-color: lightsteelblue;
+}
+
+.logo {
+    width: 50px;
+    margin-left: 30px;
+}
+
+.notes-search {
+    background-image: url(../img/icons/search-14-48.png);
+    background-repeat: no-repeat;
+    background-size: 1.125rem;
+    background-position: 3px 3px;
+    text-indent: 25px;
+    width: 12.5rem;
+    height: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: inherit;
+    outline: none;
+}
+
+.go {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+.notes-search-filter {
+    width: 120px;
+    height: 30px;
+    margin-right: 25px;
+    font-family: inherit;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
+.menuBtn {
+    margin-right: 30px;
+    text-align: center;
+    height: 30px;
+    width: 90px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+/* input menu */
+
+.input-menu {
+    background-color: lightsteelblue;
+    height: 40px;
+}
+
+.text-input {
+    text-indent: 25px;
+    width: 12.5rem;
+    height: 30px;
+    margin-right: 25px;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: inherit;
+    outline: none;
+}
+
+.add-note {
+    margin-left: 30px;
+    text-align: center;
+    height: 30px;
+    width: 60px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+.radio {
+    background-color: lightgrey;
+    color: black;
+    padding: none;
+    border: none;
+}
+
+.note-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 10px;
+    background-color: lightsteelblue;
+}
+
+.note {
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid lightgrey;
+    border-radius: 20px;
+}
+
+.note img {
+    width: 200px;
+}
+
+.pinned {
+    order: -1;
+}
+
+.pinned-img {
+    width: 40px;
+}
+
+.todos-container p {
+    display: inline-block;
+}
+
+.todos-date {
+    font-size: 0.8rem;
+}

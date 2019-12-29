@@ -14,7 +14,8 @@ export default class EmailComposeForm extends React.Component {
             isSent: true,
             isImportant: false,
             sentAt: Date.now()
-        }
+        },
+        minimize: ''
     }
 
     inputChange = (event) => {
@@ -35,11 +36,18 @@ export default class EmailComposeForm extends React.Component {
         eventBusService.emit('toggle', true);  
     }
 
+    onToggleMinimize = () => {
+        this.setState((prevState) => ({minimize: (prevState.minimize === '') ? prevState.minimize = 'minimize' : prevState.minimize = ''}))
+    }
+
     render() {
-        return <div className="compose-email-form">
+        return <div className={`compose-email-form ${this.state.minimize}`} >
             <form className="flex column">
                 <div className="message-header flex space-between">New Message
-                <i className="far fa-times-circle pointer close-button flex-end" onClick={this.closeEmailMessage}></i>
+                    <div className='flex-end'>
+                        <i className="fas fa-window-minimize pointer" onClick={this.onToggleMinimize}></i>
+                        <i className="far fa-times-circle pointer close-button" onClick={this.closeEmailMessage}></i>
+                    </div>
                 </div>
                 <input type="text" className="to" placeholder="To" name="to" onChange={this.inputChange} value={this.state.eMail.to}></input>
                 <input type="text" className="subject-compose" placeholder="Subject" name="subject" onChange={this.inputChange} value={this.state.eMail.subject}></input>

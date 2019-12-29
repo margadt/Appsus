@@ -1,19 +1,15 @@
 import { getRandomId } from "../../../services/utils.js"
 import eMailService from '../services/eMailService.js'
 
-// const { Link } = ReactRouterDOM;
-
 export default class EmailReply extends React.Component {
 
     state = {
         eMail: {
             id: getRandomId(),
-            to: '',
-            subject: '',
-            body: '',
-            isRead: false,
+            to: this.props.eMail.fromEmail,
+            subject: 're: ' + this.props.eMail.subject,
+            body: this.props.eMail.body,
             isSent: true,
-            isImportant: false,
             sentAt: Date.now()
         }
     }
@@ -40,7 +36,7 @@ export default class EmailReply extends React.Component {
         return <React.Fragment>
             <form className="flex column center align-center" onSubmit={this.onReplySend}>
                 <div>To:
-                    <input type='text' name='to' defaultValue={this.props.eMail.to}
+                    <input type='text' name='to' defaultValue={this.props.eMail.fromEmail}
                            onChange={this.inputChange}></input>
                 </div>
                 <input type='text' name='subject' defaultValue={`re: ${this.props.eMail.subject}`}

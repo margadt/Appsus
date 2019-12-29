@@ -1,0 +1,57 @@
+/*missbook*/
+
+.book {
+    width: 250px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.books-container a {
+    color: black;
+    text-decoration: none;
+}
+
+.active {
+    background-color: rgb(227, 255, 174);
+}
+
+.delete-x {
+    top: -100px;
+    left: 160px;
+    position: relative;
+    cursor: pointer;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.search-result-ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-btn {
+    cursor: pointer;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.long-text {
+    text-decoration: underline;
+    cursor: pointer;
+}
