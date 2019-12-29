@@ -23,11 +23,16 @@ export default class BooksApp extends React.Component {
         this.setState({ filterBy }, this.loadBooks);
     }
 
+    onGoToAdd = () => {
+        this.props.history.push('/addBook');
+    }
+
     render() {
         return (
             <section>
                 <h1>Books</h1>
                 <Filter onFilter={this.onFilter}></Filter>
+                <button onClick={this.onGoToAdd}>Add Book</button>
                 <BooksList books={this.state.books}></BooksList>
             </section>
         )

@@ -1,4 +1,4 @@
-import Header from '../../cmps/Header.jsx'
+import Header from '../cmps/Header.jsx'
 import AddNoteInput from '../cmps/AddNoteInput.jsx'
 import NoteList from '../cmps/NoteList.jsx'
 import keepService from '../services/keepService.js'
@@ -6,8 +6,9 @@ import keepService from '../services/keepService.js'
 export default class KeepApp extends React.Component {
     state = {
         notes: [],
-        selectedNote: null,
-        filterBy: null
+        // selectedNote: null,
+        filterBy: null,
+        selectFilter: 'all'
     }
 
     componentDidMount() {
@@ -15,7 +16,7 @@ export default class KeepApp extends React.Component {
     }
 
     loadNotes = () => {
-        keepService.getNotes(this.state.filterBy).then(notes => this.setState({ notes: notes }));
+        keepService.getNotes(this.state.filterBy, this.state.selectFilter).then(notes => this.setState({ notes: notes }));
     }
 
     onAddNote = (type, val) => {
@@ -32,8 +33,10 @@ export default class KeepApp extends React.Component {
             });
     }
 
-    onFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadNotes);
+    onFilter = (filterBy, selectFilter) => {
+        console.log('onfilterBy:', filterBy,selectFilter);
+        
+        this.setState({ filterBy, selectFilter }, this.loadNotes);
     }
 
     updateNote = (updateNote, updatedVal) => {

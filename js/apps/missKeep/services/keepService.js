@@ -8,16 +8,31 @@ export default { getNotes, addNote, deleteNote, updateNote, deleteTodo, notePinT
 let gNotes = storageService.loadPromise('notes')
     .then(res => res ? res : getDefaultNotes());
 
-function getNotes(filterBy) {
-    if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
-    return gNotes.then(notes => {
-        return [...notes.filter(note => {
-            return note.info.title && note.info.title.includes(filterBy.title) ||
-                note.info.txt && note.info.txt.includes(filterBy.title) ||
-                note.info.label && note.info.label.includes(filterBy.title) ||
-                note.info.todos && note.info.todos.some(todo => todo.txt.includes(filterBy.title))
-        })];
-    });
+function getNotes(filterBy, selectFilter) {
+    console.log('args', filterBy, selectFilter);
+
+    switch (selectFilter) {
+        case 'isPinned':
+            if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
+            return gNotes.then(notes => {
+                return [...notes.filter(note => {
+                    return note.isPinned === true && note.info.title && note.info.title.includes(filterBy.title) ||
+                        note.isPinned === true && note.info.txt && note.info.txt.includes(filterBy.title) ||
+                        note.isPinned === true && note.info.label && note.info.label.includes(filterBy.title) ||
+                        note.isPinned === true && note.info.todos && note.info.todos.some(todo => todo.txt.includes(filterBy.title))
+                })];
+            });
+        case 'all':
+            if (!filterBy || filterBy.title === null) return gNotes.then(notes => [...notes]);
+            return gNotes.then(notes => {
+                return [...notes.filter(note => {
+                    return note.info.title && note.info.title.includes(filterBy.title) ||
+                        note.info.txt && note.info.txt.includes(filterBy.title) ||
+                        note.info.label && note.info.label.includes(filterBy.title) ||
+                        note.info.todos && note.info.todos.some(todo => todo.txt.includes(filterBy.title))
+                })];
+            });
+    }
 }
 
 function addNote(type, val) {
