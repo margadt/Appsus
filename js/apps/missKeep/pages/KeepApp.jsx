@@ -18,10 +18,6 @@ export default class KeepApp extends React.Component {
         keepService.getNotes(this.state.filterBy).then(notes => this.setState({ notes: notes }));
     }
 
-    // removeSelected = () => {
-    //     this.setState({ selectedNote: null })
-    // }
-
     onAddNote = (type, val) => {
         keepService.addNote(type, val)
             .then(() => {
@@ -32,7 +28,6 @@ export default class KeepApp extends React.Component {
     onDeleteNote = (note) => {
         keepService.deleteNote(note)
             .then(() => {
-                // this.removeSelected()
                 this.loadNotes();
             });
     }
@@ -46,11 +41,26 @@ export default class KeepApp extends React.Component {
             .then(() => this.loadNotes());
     }
 
+    onDeleteTodo = (note, delTodo) => {
+        keepService.deleteTodo(note, delTodo)
+            .then(() => this.loadNotes());
+    }
+
+    onNotePinToggler = (note) => {
+        keepService.notePinToggler(note)
+            .then(() => this.loadNotes());
+    }
+
+    onChangeBgcColor = (note, color) => {
+        keepService.changeNoteBgc(note, color)
+            .then(() => this.loadNotes());
+    }
+
     render() {
         return <header className='flex column'>
             <Header onFilter={this.onFilter} placeHolder="Search notes.."></Header>
             <AddNoteInput onAddNote={this.onAddNote}></AddNoteInput>
-            <NoteList onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]} updateNote={this.updateNote}></NoteList>
+            <NoteList onChangeBgcColor={this.onChangeBgcColor} onNotePinToggler={this.onNotePinToggler} onDeleteTodo={this.onDeleteTodo} onDeleteNote={this.onDeleteNote} notes={[...this.state.notes]} updateNote={this.updateNote}></NoteList>
         </header>
     }
 }

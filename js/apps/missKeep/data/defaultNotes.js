@@ -7,7 +7,10 @@ export default function getDefaultNotes() {
             type: "NoteText",
             isPinned: true,
             info: {
-                txt: "Fullstack Me Baby!"
+                title: "Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: "#00d"
             }
         },
         {
@@ -43,7 +46,7 @@ export default function getDefaultNotes() {
                 title: "poppinn"
             },
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "yellow"
             }
         },
         {
@@ -56,6 +59,9 @@ export default function getDefaultNotes() {
                     { txt: "Do that", doneAt: null },
                     { txt: "Do this", doneAt: 187111111 }
                 ]
+            },
+            style: {
+                backgroundColor: "yellow"
             }
         }
     ]);
