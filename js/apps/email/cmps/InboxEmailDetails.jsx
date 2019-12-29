@@ -12,14 +12,14 @@ export default class InboxEmailDetails extends React.Component {
     render() {
         return <React.Fragment>
             <div className='dynamic-comp email-details-container'>
-                <div className='flex column align-center'>
-                    <div className="nav-buttons-container flex align-center">
+                <div className='message-container flex column'>
+                    <div className="nav-buttons-container flex">
                         <div className="nav-button pointer" onClick={this.onReply}>Reply</div>
                         <div className="nav-button pointer" onClick={() => this.props.changeEmailShown(-1)}>Previous</div>
                         <div className="nav-button pointer" onClick={this.props.goBack}>Back To Inbox</div>
                         <div className="nav-button pointer" onClick={() => this.props.changeEmailShown(1)}>Next</div>
                     </div>
-                    <div className='nav-buttons-container flex column'>
+                    <div className='email-details-container flex column'>
                         <div>From: {this.props.eMail.from} ( <small>{this.props.eMail.fromEmail}</small> ) </div>
                         <div>Subject: {this.props.eMail.subject}</div>
                         <div>Received: {formatDateEmailDetails(this.props.eMail.sentAt)}</div>

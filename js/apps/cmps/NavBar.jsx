@@ -10,7 +10,7 @@ export default function NavBar(props) {
                     </NavLink>
                 </div>
                 <div className='nav-bar-icon-container'>
-                    <NavLink activeClassName="active" to='/email' exact>
+                    <NavLink activeClassName="active" to='/email'>
                         <i className="fas fa-at"></i>
                     </NavLink>
                 </div>
@@ -20,7 +20,7 @@ export default function NavBar(props) {
                     </NavLink>
                 </div>
                 <div className='nav-bar-icon-container'>
-                    <NavLink activeClassName="active" to='/book' exact>
+                    <NavLink activeClassName="active" to='/book'>
                         <i className="fas fa-book-dead"></i>
                     </NavLink>
                 </div>
